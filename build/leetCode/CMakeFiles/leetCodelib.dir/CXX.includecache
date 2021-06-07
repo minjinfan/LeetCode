@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.cpp
+test.hpp
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.hpp
+
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.hpp
+iostream
+-
+string.h
+-
+vector
+-
+

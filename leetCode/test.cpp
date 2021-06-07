@@ -1,7 +1,7 @@
 #include"test.hpp"
 using namespace std;
 
-void test()
+void test::show()
 {
-    cout << "test" << endl;
+    cout << "test fmj " << endl;
 }
