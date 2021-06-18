@@ -36,7 +36,7 @@
 					]
 				}
 			],
-			"name" : "",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -58,14 +58,14 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "leetCodelib::@af8bdb59d6f759443ff6",
-					"jsonFile" : "target-leetCodelib-bb48fdec003f84396687.json",
+					"jsonFile" : "target-leetCodelib-Debug-0e27ab8a9cfe835bc2ff.json",
 					"name" : "leetCodelib",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main-89abd4883ff956766898.json",
+					"jsonFile" : "target-main-Debug-ef2f1a6ed4821b771d7b.json",
 					"name" : "main",
 					"projectIndex" : 0
 				}

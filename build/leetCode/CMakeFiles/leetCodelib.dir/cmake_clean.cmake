@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "../../lib/libleetCodelib.a"
   "../../lib/libleetCodelib.pdb"
+  "CMakeFiles/leetCodelib.dir/function.cpp.obj"
   "CMakeFiles/leetCodelib.dir/test.cpp.obj"
 )
 

@@ -144,6 +144,33 @@ leetCodelib/fast:
 	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build && $(MAKE) $(MAKESILENT) -f leetCode/CMakeFiles/leetCodelib.dir/build.make leetCode/CMakeFiles/leetCodelib.dir/build
 .PHONY : leetCodelib/fast
 
+function.obj: function.cpp.obj
+
+.PHONY : function.obj
+
+# target to build an object file
+function.cpp.obj:
+	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build && $(MAKE) $(MAKESILENT) -f leetCode/CMakeFiles/leetCodelib.dir/build.make leetCode/CMakeFiles/leetCodelib.dir/function.cpp.obj
+.PHONY : function.cpp.obj
+
+function.i: function.cpp.i
+
+.PHONY : function.i
+
+# target to preprocess a source file
+function.cpp.i:
+	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build && $(MAKE) $(MAKESILENT) -f leetCode/CMakeFiles/leetCodelib.dir/build.make leetCode/CMakeFiles/leetCodelib.dir/function.cpp.i
+.PHONY : function.cpp.i
+
+function.s: function.cpp.s
+
+.PHONY : function.s
+
+# target to generate assembly for a file
+function.cpp.s:
+	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build && $(MAKE) $(MAKESILENT) -f leetCode/CMakeFiles/leetCodelib.dir/build.make leetCode/CMakeFiles/leetCodelib.dir/function.cpp.s
+.PHONY : function.cpp.s
+
 test.obj: test.cpp.obj
 
 .PHONY : test.obj
@@ -180,6 +207,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... leetCodelib"
+	@echo "... function.obj"
+	@echo "... function.i"
+	@echo "... function.s"
 	@echo "... test.obj"
 	@echo "... test.i"
 	@echo "... test.s"

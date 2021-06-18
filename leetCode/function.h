@@ -43,6 +43,9 @@ public:
     // question 203
     LinkNode* removeElement(LinkNode* head, int val);
 
+    // question 19
+    LinkNode* removeNthFromEnd(LinkNode* head, int n);
+
 };
 
 #endif

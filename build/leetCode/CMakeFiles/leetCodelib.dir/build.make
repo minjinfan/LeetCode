@@ -76,10 +76,24 @@ include leetCode/CMakeFiles/leetCodelib.dir/progress.make
 # Include the compile flags for this target's objects.
 include leetCode/CMakeFiles/leetCodelib.dir/flags.make
 
+leetCode/CMakeFiles/leetCodelib.dir/function.cpp.obj: leetCode/CMakeFiles/leetCodelib.dir/flags.make
+leetCode/CMakeFiles/leetCodelib.dir/function.cpp.obj: leetCode/CMakeFiles/leetCodelib.dir/includes_CXX.rsp
+leetCode/CMakeFiles/leetCodelib.dir/function.cpp.obj: ../leetCode/function.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object leetCode/CMakeFiles/leetCodelib.dir/function.cpp.obj"
+	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/leetCode && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/leetCodelib.dir/function.cpp.obj -c E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/function.cpp
+
+leetCode/CMakeFiles/leetCodelib.dir/function.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/leetCodelib.dir/function.cpp.i"
+	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/leetCode && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/function.cpp > CMakeFiles/leetCodelib.dir/function.cpp.i
+
+leetCode/CMakeFiles/leetCodelib.dir/function.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/leetCodelib.dir/function.cpp.s"
+	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/leetCode && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/function.cpp -o CMakeFiles/leetCodelib.dir/function.cpp.s
+
 leetCode/CMakeFiles/leetCodelib.dir/test.cpp.obj: leetCode/CMakeFiles/leetCodelib.dir/flags.make
 leetCode/CMakeFiles/leetCodelib.dir/test.cpp.obj: leetCode/CMakeFiles/leetCodelib.dir/includes_CXX.rsp
 leetCode/CMakeFiles/leetCodelib.dir/test.cpp.obj: ../leetCode/test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object leetCode/CMakeFiles/leetCodelib.dir/test.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object leetCode/CMakeFiles/leetCodelib.dir/test.cpp.obj"
 	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/leetCode && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/leetCodelib.dir/test.cpp.obj -c E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.cpp
 
 leetCode/CMakeFiles/leetCodelib.dir/test.cpp.i: cmake_force
@@ -92,15 +106,17 @@ leetCode/CMakeFiles/leetCodelib.dir/test.cpp.s: cmake_force
 
 # Object files for target leetCodelib
 leetCodelib_OBJECTS = \
+"CMakeFiles/leetCodelib.dir/function.cpp.obj" \
 "CMakeFiles/leetCodelib.dir/test.cpp.obj"
 
 # External object files for target leetCodelib
 leetCodelib_EXTERNAL_OBJECTS =
 
+../lib/libleetCodelib.a: leetCode/CMakeFiles/leetCodelib.dir/function.cpp.obj
 ../lib/libleetCodelib.a: leetCode/CMakeFiles/leetCodelib.dir/test.cpp.obj
 ../lib/libleetCodelib.a: leetCode/CMakeFiles/leetCodelib.dir/build.make
 ../lib/libleetCodelib.a: leetCode/CMakeFiles/leetCodelib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library ../../lib/libleetCodelib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library ../../lib/libleetCodelib.a"
 	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/leetCode && $(CMAKE_COMMAND) -P CMakeFiles/leetCodelib.dir/cmake_clean_target.cmake
 	cd E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/build/leetCode && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/leetCodelib.dir/link.txt --verbose=$(VERBOSE)
 

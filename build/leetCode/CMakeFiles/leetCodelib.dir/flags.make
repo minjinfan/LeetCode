@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/leetCodelib.dir/includes_CXX.rsp
 
-CXX_FLAGS =  -g -std=gnu++11
+CXX_FLAGS =  -g -g -std=gnu++11
 

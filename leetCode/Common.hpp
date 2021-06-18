@@ -59,7 +59,7 @@ public:
 };
 
 
-void ShowLinkList(LinkNode *List)
+inline void ShowLinkList(LinkNode *List)
 {
     LinkNode dummyHead;
     dummyHead.next = List;

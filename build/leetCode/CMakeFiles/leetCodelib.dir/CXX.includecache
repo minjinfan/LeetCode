@@ -6,15 +6,23 @@
 
 #IncludeRegexTransform: 
 
-E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.cpp
-test.hpp
-E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.hpp
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/Common.hpp
+iostream
+-
+vector
+-
 
-E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/test.hpp
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/function.cpp
+function.h
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/function.h
+
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/function.h
 iostream
 -
 string.h
 -
 vector
 -
+Common.hpp
+E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode/Common.hpp
 
