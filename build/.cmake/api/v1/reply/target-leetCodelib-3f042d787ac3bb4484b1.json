@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/lib/libleetCodelib.a"
+			"path" : "E:/VS_WorkSpace/LeetCode/lib/libleetCodelib.a"
 		}
 	],
 	"backtrace" : 1,
@@ -47,17 +47,14 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -g -g"
-				},
-				{
-					"fragment" : "-std=gnu++11"
+					"fragment" : " -g   -std=gnu++11"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 3,
-					"path" : "E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode"
+					"path" : "E:/VS_WorkSpace/LeetCode/leetCode"
 				}
 			],
 			"language" : "CXX",

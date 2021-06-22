@@ -32,12 +32,22 @@ public:
 
     }
 
-     void addAtHead(int val) {
+    void addAtHead(int val) {
         LinkNode *newHead = new LinkNode(val);
         LinkNode *cur = &_dummyHead;
         newHead->next = cur->next;
         cur->next = newHead;
         _size++;
+    }
+
+    void addAtTail(int &val){
+        LinkNode *newNode = new LinkNode(val);
+        LinkNode *cur = &_dummyHead;
+        while(cur->next != nullptr){
+            cur = cur->next;
+        }
+        cur->next = newNode;
+        ++_size;
     }
 
     void GenerateList(int n)

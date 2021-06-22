@@ -43,3 +43,34 @@ LinkNode* Solution::removeNthFromEnd(LinkNode* head, int n)
     return dummyHead->next;
 }
 
+LinkNode* Solution::getIntersectionNode(LinkNode *headA, LinkNode *headB)
+{
+    LinkNode* A = headA;
+    LinkNode* B = headB;
+    int lenA = 0, lenB = 0;
+    while(A != nullptr){
+        lenA++;
+        A = A->next;
+    }
+    while(B != nullptr){
+        lenB++;
+        B = B->next;
+    }
+    A = headA;
+    B = headB;
+    if(lenB > lenA){
+        swap(A, B);
+        swap(lenA, lenB);
+    }
+    int delta = lenA - lenB;
+    while(delta--){
+        A = A->next;
+    }
+    while(A != nullptr){
+        if(A == B)
+            return A;
+        A = A->next;
+        B = B->next;
+    }
+    return NULL;
+}

@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/bin/main.exe"
+			"path" : "E:/VS_WorkSpace/LeetCode/bin/main.exe"
 		},
 		{
-			"path" : "E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/bin/main.pdb"
+			"path" : "E:/VS_WorkSpace/LeetCode/bin/main.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,17 +52,14 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -g -g"
-				},
-				{
-					"fragment" : "-std=gnu++11"
+					"fragment" : " -g   -std=gnu++11"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 3,
-					"path" : "E:/VsCode_WorkSpace/LeedCode_fmj/LeedCode/leetCode"
+					"path" : "E:/VS_WorkSpace/LeetCode/leetCode"
 				}
 			],
 			"language" : "CXX",
@@ -85,20 +82,11 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g -g",
+				"fragment" : "-g",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
-				"role" : "flags"
-			},
-			{
-				"backtrace" : 2,
-				"fragment" : "../lib/libleetCodelib.a",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"fragment" : "../lib/libleetCodelib.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
 				"role" : "libraries"
 			}
 		],

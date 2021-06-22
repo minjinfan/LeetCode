@@ -3,39 +3,38 @@
 	{
 		"generator" : 
 		{
-			"multiConfig" : false,
 			"name" : "Unix Makefiles"
 		},
 		"paths" : 
 		{
-			"cmake" : "C:/Program Files/CMake/bin/cmake.exe",
-			"cpack" : "C:/Program Files/CMake/bin/cpack.exe",
-			"ctest" : "C:/Program Files/CMake/bin/ctest.exe",
-			"root" : "C:/Program Files/CMake/share/cmake-3.18"
+			"cmake" : "C:/Program Files (x86)/CMake/bin/cmake.exe",
+			"cpack" : "C:/Program Files (x86)/CMake/bin/cpack.exe",
+			"ctest" : "C:/Program Files (x86)/CMake/bin/ctest.exe",
+			"root" : "C:/Program Files (x86)/CMake/share/cmake-3.15"
 		},
 		"version" : 
 		{
 			"isDirty" : false,
 			"major" : 3,
-			"minor" : 18,
-			"patch" : 4,
-			"string" : "3.18.4",
+			"minor" : 15,
+			"patch" : 5,
+			"string" : "3.15.5",
 			"suffix" : ""
 		}
 	},
 	"objects" : 
 	[
 		{
-			"jsonFile" : "codemodel-v2-cf7fadb3c0862299be19.json",
+			"jsonFile" : "codemodel-v2-acc82bbcd72a5edcb791.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
 				"major" : 2,
-				"minor" : 1
+				"minor" : 0
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-b4f4a9419448b52518f6.json",
+			"jsonFile" : "cache-v2-6788249f45f9525c3d78.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -68,7 +67,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-b4f4a9419448b52518f6.json",
+						"jsonFile" : "cache-v2-6788249f45f9525c3d78.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -77,12 +76,12 @@
 						}
 					},
 					{
-						"jsonFile" : "codemodel-v2-cf7fadb3c0862299be19.json",
+						"jsonFile" : "codemodel-v2-acc82bbcd72a5edcb791.json",
 						"kind" : "codemodel",
 						"version" : 
 						{
 							"major" : 2,
-							"minor" : 1
+							"minor" : 0
 						}
 					},
 					{
