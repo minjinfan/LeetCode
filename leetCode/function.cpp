@@ -74,3 +74,23 @@ LinkNode* Solution::getIntersectionNode(LinkNode *headA, LinkNode *headB)
     }
     return NULL;
 }
+
+LinkNode *Solution::detectCycle(LinkNode *head)
+{
+     LinkNode* fast = head;
+        LinkNode* slow = head;
+        while(fast != nullptr && fast->next != nullptr){
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow){
+                LinkNode* node1 = fast;
+                LinkNode* node2 = head;
+                while(node1 != node2){
+                    node1 = node1->next;
+                    node2 = node2->next;
+                }
+                return node2;
+            }
+        }
+        return NULL;
+}
