@@ -94,3 +94,43 @@ LinkNode *Solution::detectCycle(LinkNode *head)
         }
         return NULL;
 }
+
+void Solution::Readfile()
+{
+    string name = "8G_In";
+    string path = "C:\\Users\\minji_eimum53\\Desktop\\WavePort\\J\\tmp/";
+
+    string type1 = ".txt";
+    string filePath_In = path + name + type1;
+
+    vector<double> X, Z, V;
+    ifstream infile(filePath_In);
+    if (!infile.is_open())
+	{
+		cout << "读取文件失败" << endl;
+		return ;
+	}
+    while(infile){
+        string line;
+        double x, z, v;
+        getline(infile, line);
+        if(infile.fail()) break;
+
+        stringstream sin(line);
+        sin >> x >> z >> v;
+        if(z > 0.02) continue;
+        X.push_back(x);
+        Z.push_back(z);
+        V.push_back(v);
+
+    }
+    infile.close();
+
+    string type2 = "_Current.txt";
+    string filePath_Out = path + name + type2;
+    ofstream outfile(filePath_Out);
+    for(int i = 0; i < X.size(); ++i){
+        outfile << X[i] << "\t" << Z[i] << "\t" << V[i] << endl;
+    }
+    outfile.close();
+}
