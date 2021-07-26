@@ -134,3 +134,31 @@ void Solution::Readfile()
     }
     outfile.close();
 }
+
+int Solution::fib(int N)
+{
+    if(N < 2)
+        return N;
+    
+    /* 递归 时间复杂度O(2^n)*/
+    // return fib(N-1) + fib(N-2);
+
+
+    // std::vector<int> dp(N+1);
+    // dp[0] = 0;
+    // dp[1] = 1;
+    // for(int i = 2; i <= N; ++i){
+    //     dp[i] = dp[i - 1] + dp[i - 2];
+    // }
+    // return dp[N];
+
+    int dp[2];
+    dp[0] = 0;
+    dp[1] = 1;
+    for(int i = 2; i <= N; ++i){
+        int sum = dp[0] + dp[1];
+        dp[0] = dp[1];
+        dp[1] = sum;
+    }
+    return dp[1];
+}

@@ -7,6 +7,7 @@ using namespace std;
 
 int main(int argc, char* argv)
 {
+    Solution sl;
     // MyLinkedList myList;
     // myList.GenerateList(6);
     // cout << "old LinkList: " << endl;
@@ -22,10 +23,9 @@ int main(int argc, char* argv)
 
     // vector<int> vecA = {1,3,5,7,9,11,13,15};
 
-    Solution q;
-    q.Readfile();
+    int fibNum = sl.fib(10);
+    cout << fibNum << endl;
 
-    cout << "Hello World!" << endl;
-
+    cout << "End of program" << endl;
     return 0;
 }
