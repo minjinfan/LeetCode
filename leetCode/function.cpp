@@ -162,3 +162,19 @@ int Solution::fib(int N)
     }
     return dp[1];
 }
+
+int Solution::climbStairs(int n)
+{
+    if(n <= 3)
+        return n;
+
+    int dp[3];
+    dp[1] = 1;
+    dp[2] = 2;
+    for(int i = 3; i <= n; ++i){
+        int sum = dp[1] + dp[2];
+        dp[1] = dp[2];
+        dp[2] = sum;
+    }
+    return dp[2];
+}

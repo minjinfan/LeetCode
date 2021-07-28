@@ -23,9 +23,12 @@ int main(int argc, char* argv)
 
     // vector<int> vecA = {1,3,5,7,9,11,13,15};
 
-    int fibNum = sl.fib(10);
-    cout << fibNum << endl;
+    // int fibNum = sl.fib(10);
+    // cout << fibNum << endl;
 
-    cout << "End of program" << endl;
+    int climbStairs = sl.climbStairs(9);
+    cout << "climbStairs:    " << climbStairs << endl;
+
+    cout << endl << "End of program" << endl;
     return 0;
 }
