@@ -5,9 +5,10 @@
 #include "leetCode/function.h"
 using namespace std;
 
-int main(int argc, char* argv)
+int main(int argc, char** argv)
 {
     Solution sl;
+
     // MyLinkedList myList;
     // myList.GenerateList(6);
     // cout << "old LinkList: " << endl;
@@ -26,9 +27,13 @@ int main(int argc, char* argv)
     // int fibNum = sl.fib(10);
     // cout << fibNum << endl;
 
-    int climbStairs = sl.climbStairs(9);
-    cout << "climbStairs:    " << climbStairs << endl;
+    // int climbStairs = sl.climbStairs(9);
+    // cout << "climbStairs:    " << climbStairs << endl;
+    // cout << endl << "End of program" << endl;
 
-    cout << endl << "End of program" << endl;
+    vector<int> vec = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+    int res = sl.minCostClimbingStairs(vec);
+    cout << res << endl;
+    
     return 0;
 }
