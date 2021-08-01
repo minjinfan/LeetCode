@@ -35,8 +35,8 @@ int main(int argc, char** argv)
     // int res = sl.minCostClimbingStairs(vec);
     // cout << res << endl;
     
-    vector<int> vec = {2, 1, 1, 2};
-    int res = sl.rob(vec);
+    vector<int> vec = {2,3,2};
+    int res = sl.rob2(vec);
     cout << res << endl;
 
     return 0;

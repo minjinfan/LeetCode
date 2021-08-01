@@ -213,3 +213,30 @@ int Solution::rob(vector<int>& nums)
     }
     return max(dp[size-1], dp[size-2]);
 }
+
+int Solution::rob2(vector<int>& nums)
+{
+    auto func = [&](int left, int right, vector<int> &nums)->int{
+        int size = right;
+        vector<int> dp(nums.size(), 0);
+        dp[left] = nums[left];
+        dp[left + 1] = max(nums[left], nums[left + 1]);
+        for(int i = left + 2; i < size; ++i){ // 1~ size -1
+            dp[i] = max(dp[i-1], dp[i-2]+ nums[i]);
+        }
+
+        return max(dp[right - 1], dp[right - 2]);
+    };
+
+    int size = nums.size();
+    if(size < 1)
+        return 0;
+    if(size == 1)
+        return nums[0];
+    if(size == 2)
+        return max(nums[0], nums[1]);
+        
+    int a = func(0, size - 1, nums);
+    int b = func(1, size, nums);    
+    return max(a, b);
+}
