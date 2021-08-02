@@ -240,3 +240,25 @@ int Solution::rob2(vector<int>& nums)
     int b = func(1, size, nums);    
     return max(a, b);
 }
+
+ int Solution::deleteAndEarn(vector<int>& nums) {
+    int size = nums.size();
+    map<int, int> sum;
+    int maxnum = -1;
+    for(auto num : nums){
+        maxnum = max(maxnum, num);
+        auto iter = sum.find(num);
+        if(iter == sum.end()){
+            sum.insert(pair<int, int>(num, 1));
+        }else{
+            iter->second++;
+        }
+        
+    }
+    vector<int> newVec(maxnum + 1, 0);
+    for(auto it = sum.begin(); it != sum.end(); it++){
+        newVec[it->first] = (it->first * it->second);
+    }
+    int res = rob(newVec);
+    return res;
+}

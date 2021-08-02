@@ -3,6 +3,7 @@
 #include<iostream>
 #include <string.h>
 #include <vector>
+#include <map>
 #include <fstream>
 #include <sstream>
 
@@ -48,6 +49,8 @@ public:
     int rob(vector<int>& nums);
     // 213. 打家劫舍 II   你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 
     int rob2(vector<int>& nums);
+    // 740. 删除并获得点数    给你一个整数数组 nums ，你可以对它进行一些操作。每次操作中，选择任意一个 nums[i] ，删除它并获得 nums[i] 的点数。之后，你必须删除 所有 等于 nums[i] - 1 和 nums[i] + 1 的元素。
+    int deleteAndEarn(vector<int>& nums);
 };
 
 #endif
