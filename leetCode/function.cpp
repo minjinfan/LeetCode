@@ -242,23 +242,35 @@ int Solution::rob2(vector<int>& nums)
 }
 
  int Solution::deleteAndEarn(vector<int>& nums) {
-    int size = nums.size();
-    map<int, int> sum;
-    int maxnum = -1;
-    for(auto num : nums){
-        maxnum = max(maxnum, num);
-        auto iter = sum.find(num);
-        if(iter == sum.end()){
-            sum.insert(pair<int, int>(num, 1));
-        }else{
-            iter->second++;
-        }
+    // int size = nums.size();
+    // map<int, int> sum;
+    // int maxnum = -1;
+    // for(auto num : nums){
+    //     maxnum = max(maxnum, num);
+    //     auto iter = sum.find(num);
+    //     if(iter == sum.end()){
+    //         sum.insert(pair<int, int>(num, 1));
+    //     }else{
+    //         iter->second++;
+    //     }
         
+    // }
+    // vector<int> newVec(maxnum + 1, 0);
+    // for(auto it = sum.begin(); it != sum.end(); it++){
+    //     newVec[it->first] = (it->first * it->second);
+    // }
+    // int res = rob(newVec);
+
+    int Max = -1;
+    for(auto num : nums){
+        Max = max(num, Max);
     }
-    vector<int> newVec(maxnum + 1, 0);
-    for(auto it = sum.begin(); it != sum.end(); it++){
-        newVec[it->first] = (it->first * it->second);
+    vector<int> sum(Max + 1, 0);
+    for(auto num : nums){
+        sum[num] += num;
     }
-    int res = rob(newVec);
+    int res = rob(sum);
+    return res;
+
     return res;
 }
