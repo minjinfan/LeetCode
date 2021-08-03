@@ -274,3 +274,47 @@ int Solution::rob2(vector<int>& nums)
 
     return res;
 }
+
+double Solution::GaussIntegral_1D()
+{
+
+}
+
+void Solution::TransformIntegraInterval(vector<vec3> &Line, int Xmin, int Xmax)
+{
+    std::vector<double> X, W;
+
+    X.push_back(-0.9815606342467190); W.push_back(0.0471753363865118);
+    X.push_back(-0.9041172563704740); W.push_back(0.1069393259953180);
+    X.push_back(-0.7699026741943040); W.push_back(0.1600783285433460);
+    X.push_back(-0.5873179542866170); W.push_back(0.2031674267230650);
+    X.push_back(-0.3678314989981800); W.push_back(0.2334925365383540);
+    X.push_back(-0.1252334085114680); W.push_back(0.2491470458134020);
+    X.push_back(0.1252334085114680); W.push_back(0.2491470458134020);
+    X.push_back(0.3678314989981800); W.push_back(0.2334925365383540);
+    X.push_back(0.5873179542866170); W.push_back(0.2031674267230650);
+    X.push_back(0.7699026741943040); W.push_back(0.1600783285433460);
+    X.push_back(0.9041172563704740); W.push_back(0.1069393259953180);
+    X.push_back(0.9815606342467190); W.push_back(0.0471753363865118);
+
+    int X_size = X.size();
+    
+    int L_length = Xmax - Xmin;
+	real common_term = L_length / 2.0;
+	std::vector<real> new_x, new_w;
+	new_x.resize(X_size);
+	new_w.resize(X_size);
+
+	for(int i = 0; i < X.size(); i++){
+		new_x[i] = common_term * X[i] + common_term;
+		new_w[i] = common_term * W[i];
+	}
+
+    std::vector<vec3> r_vec;
+	for(int i = 0; i < X.size(); i++){
+		vec3 r;
+		faxpBy(r, new_x[i], L_vec_n, Xmin);
+		r_vec.push_back(r);
+	}
+    
+}

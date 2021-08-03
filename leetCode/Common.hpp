@@ -2,7 +2,9 @@
 #include <vector>
 
 using namespace std;
-
+typedef double real;
+typedef std::vector<double> vec3;
+typedef std::vector<double> vec2;
 struct LinkNode
 {
     int val;
@@ -78,4 +80,12 @@ inline void ShowLinkList(LinkNode *List)
         cout << cur->next->val << "\t";
         cur = cur->next;
     }
+}
+
+// Y = a * x + b
+inline void faxpBy(vector<double> &Y, real& a, vector<double> &X, vector<double> &B)
+{
+	for(int i = 0; i < 3; ++i){
+		Y[i] = a * X[i] + B[i];
+	}
 }
