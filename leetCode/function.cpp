@@ -275,3 +275,20 @@ int Solution::rob2(vector<int>& nums)
     return res;
 }
 
+bool Solution::canJump(vector<int>& nums)
+{
+    int n = nums.size();
+    // if(n == 0)
+    //     return true;
+    int Max = 0;
+    for(int i = 0; i < n; ++i){
+        
+        if(i <= Max ){
+            Max = max(Max, i + nums[i] );
+            if(Max >= n - 1)
+                return true;
+        }
+        
+    }
+    return false;
+}

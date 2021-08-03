@@ -52,6 +52,8 @@ public:
     // 740. 删除并获得点数    给你一个整数数组 nums ，你可以对它进行一些操作。每次操作中，选择任意一个 nums[i] ，删除它并获得 nums[i] 的点数。之后，你必须删除 所有 等于 nums[i] - 1 和 nums[i] + 1 的元素。
     int deleteAndEarn(vector<int>& nums);
 
+    // 55. 跳跃游戏    给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度,判断你是否能够到达最后一个下标
+    bool canJump(vector<int>& nums);
 };
 
 #endif
