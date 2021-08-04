@@ -292,3 +292,21 @@ bool Solution::canJump(vector<int>& nums)
     }
     return false;
 }
+
+int Solution::jump(vector<int>& nums)
+{
+    int start = 0, end = 0;
+    int num = nums.size();
+    int MaxIndex = 0;
+    int step = 0;
+
+    for(int i = 0; i < num - 1; ++i){
+        MaxIndex = max(MaxIndex, nums[i] + i);
+        if(i == end){
+            // start = end;
+            end = MaxIndex;
+            ++step;
+        }
+    }
+    return step;
+}
