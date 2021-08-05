@@ -35,8 +35,8 @@ int main(int argc, char** argv)
     // int res = sl.minCostClimbingStairs(vec);
     // cout << res << endl;
     
-    vector<int> vec = {2,3,1,1,4};
-    int res = sl.jump(vec);
+    vector<int> vec = {-2,1,-3,4,-1,2,1,-5,4};
+    int res = sl.maxSubArray(vec);
     cout << res << endl;
 
     return 0;
