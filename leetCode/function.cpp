@@ -321,3 +321,20 @@ int Solution::maxSubArray(vector<int>& nums)
     }
     return res;
 }
+
+int Solution::maxProduct(vector<int>& nums)
+{
+    int size = nums.size();
+    vector<int> MaxVec(size, 0);
+    vector<int> MinVec(size, 0);
+    MaxVec[0] = nums[0];
+    MinVec[0] = nums[0];
+    for(int i = 1; i < size; ++i){
+        MaxVec[i] = max(MaxVec[i-1] * nums[i], max(MinVec[i-1] * nums[i],  nums[i]));
+        MinVec[i] = min(MaxVec[i-1] * nums[i], min(MinVec[i-1] * nums[i],  nums[i]));
+    }
+    for(auto m : MaxVec){
+        cout << m << "\t" << endl;
+    }
+    return *max_element(MaxVec.begin(), MaxVec.end());
+}
