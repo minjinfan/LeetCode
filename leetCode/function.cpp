@@ -1,5 +1,85 @@
 #include"function.h"
 
+void Solution::BubbleSort(vector<int> &vec)
+{
+    for(int i = 0; i < vec.size() - 1; ++i){
+        bool flag = false;
+        for(int j = 0; j < vec.size() - i - 1; ++j){
+            if(vec[j] > vec[j + 1]){
+                swap(vec[j], vec[j + 1]);   
+
+                flag = true;
+            }
+        }
+        DisplayVec(vec);
+        if(!flag)
+            break;
+    }
+}
+
+int Solution::PartSort(vector<int> &vec, int begin, int end)
+{
+    // int key = GetMid(vec, begin, end);
+    int key = end;
+    cout << "key:  " << key << endl;
+    while(begin < end){
+        while(vec[begin] <= vec[key] && begin < end){
+            begin++;
+        }
+
+        while(vec[end] >= vec[key] && begin < end){
+            end--;
+        }
+        if(begin < end){
+            swap(vec[begin], vec[end]);
+        }
+    }
+
+    swap(vec[begin], vec[key]);
+    DisplayVec(vec);
+    return begin;
+}
+
+void Solution::QuickSort(vector<int> &Vec, int start, int final)
+{
+    if(start < final){
+        int div = PartSort(Vec, start, final - 1);
+        QuickSort(Vec, start, div);
+        QuickSort(Vec, div + 1, final);
+    }
+}
+
+int Solution::GetMid(vector<int> &Vec, int l, int r)
+{
+    int mid = ((l + r) >> 1);
+    // int mid = (l + r) / 2;
+    if(Vec[l] < Vec[mid]){
+        if(Vec[mid] < Vec[r])
+            return mid;
+        else if(Vec[l] < Vec[r])
+            return r;
+        else
+            return l;
+
+    }
+    else{
+        if(Vec[mid] > Vec[r])
+            return mid;
+        else if(Vec[l] > Vec[r])
+            return r;
+        else    
+            return l;
+    }
+}
+
+void Solution::DisplayVec(vector<int> &Vec)
+{
+    for(auto v : Vec){
+        cout << v << "\t";
+    }
+    cout << endl;
+}
+
 LinkNode* Solution::removeElement(LinkNode* head, int val)
 {
       LinkNode *dummyNode = new LinkNode();

@@ -16,6 +16,18 @@ public:
     Solution(){}
     ~Solution(){}
 
+    /****************************************    排序    ****************************************/
+    // 冒泡
+    void BubbleSort(vector<int> &vec);
+
+    // 快排
+    void QuickSort(vector<int> &Vec, int start, int final);
+    int PartSort(vector<int> &vec, int begin, int end);
+    int GetMid(vector<int> &Vec, int l, int r);
+
+
+
+
     /****************************************    链表    ****************************************/
 
     // question 203  给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点
@@ -32,6 +44,7 @@ public:
 
     void Readfile();
 
+    void DisplayVec(vector<int> &Vec);
 
 
     /****************************************    动态规划    ****************************************/
