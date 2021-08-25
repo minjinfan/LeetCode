@@ -28,9 +28,10 @@ public:
     void BubbleSort(vector<int> &vec);
 
     // 快排
+    void FastSort(vector<int> &vec);
     void FastSort(vector<int> &Vec, int start, int final);
     int PartSort(vector<int> &vec, int begin, int end);
-    int GetMid(vector<int> &Vec, int l, int r);
+    int GetMid(vector<int> &vec, int left, int right);
 
     void quickSort(vector<int> &vec);
     void quickSort(vector<int> &vec, int start, int end);

@@ -48,6 +48,10 @@ int Solution::PartSort(vector<int> &vec, int begin, int end)
     return begin;
 }
 
+void Solution::FastSort(vector<int> &vec)
+{
+    FastSort(vec, 0, vec.size());
+}
 void Solution::FastSort(vector<int> &Vec, int start, int final)
 {
     if(start < final){
@@ -57,26 +61,25 @@ void Solution::FastSort(vector<int> &Vec, int start, int final)
     }
 }
 
-int Solution::GetMid(vector<int> &Vec, int l, int r)
+int Solution::GetMid(vector<int> &vec, int left, int right)
 {
-    int mid = ((l + r) >> 1);
-    // int mid = (l + r) / 2;
-    if(Vec[l] < Vec[mid]){
-        if(Vec[mid] < Vec[r])
-            return mid;
-        else if(Vec[l] < Vec[r])
-            return r;
-        else
-            return l;
+    int mid  = ((left + right) >> 1);
 
+    if(vec[left] < vec[right]){
+        if(vec[right] < vec[mid])
+            return right;
+        else if(vec[left] < vec[mid])
+            return mid;
+        else
+            return left;
     }
     else{
-        if(Vec[mid] > Vec[r])
+        if(vec[left] < vec[mid])
+            return left;
+        else if(vec[right] < vec[mid])
             return mid;
-        else if(Vec[l] > Vec[r])
-            return r;
-        else    
-            return l;
+        else
+            return right;
     }
 }
 
@@ -98,6 +101,9 @@ void Solution::quickSort(vector<int> &vec, int start, int end)
 
 int Solution::Partition(vector<int> &vec, int start, int end)
 {
+    int idx = GetMid(vec, start, end);
+    Exchange(vec, start, idx);
+
     {
         int pivot = vec[start];
         int left = start + 1;
