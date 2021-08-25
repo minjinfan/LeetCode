@@ -24,7 +24,7 @@ add_executable(main ${DIR_MAIN})
 
 # 链接hellolib库，注意下面子目录src的CMakeLists
 link_directories("${PROJECT_SOURCE_DIR}/lib")
-target_link_libraries(main leetCodelib)
+target_link_libraries(main leetCode)
 
 
 
