@@ -113,7 +113,7 @@ int Solution::Partition(vector<int> &vec, int start, int end)
         }
         if(left == right && vec[right] > pivot)    
             right--;
-            
+
         if(left != start)
             Exchange(vec, start, right);
 
@@ -252,10 +252,10 @@ LinkNode *Solution::detectCycle(LinkNode *head)
         return NULL;
 }
 
-void Solution::Readfile()
+void Solution::ReadCurrent()
 {
-    string name = "8G_In";
-    string path = "C:\\Users\\minji_eimum53\\Desktop\\WavePort\\J\\tmp/";
+    string name = "0_NoGND";
+    string path = "C:\\Users\\minji_eimum53\\Desktop\\WavePort\\J\\825\\";
 
     string type1 = ".txt";
     string filePath_In = path + name + type1;
@@ -267,6 +267,8 @@ void Solution::Readfile()
 		cout << "读取文件失败" << endl;
 		return ;
 	}
+
+    double limit = 0.01;
     while(infile){
         string line;
         double x, z, v;
@@ -275,7 +277,7 @@ void Solution::Readfile()
 
         stringstream sin(line);
         sin >> x >> z >> v;
-        if(z > 0.02) continue;
+        if(z > limit) continue;
         X.push_back(x);
         Z.push_back(z);
         V.push_back(v);
@@ -290,6 +292,8 @@ void Solution::Readfile()
         outfile << X[i] << "\t" << Z[i] << "\t" << V[i] << endl;
     }
     outfile.close();
+    
+    std::cout << "Read Over!" << std::endl;
 }
 
 int Solution::fib(int N)
