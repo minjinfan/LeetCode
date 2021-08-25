@@ -1,5 +1,13 @@
 #include"function.h"
 
+void Solution::DisplayVec(vector<int> &Vec)
+{
+    for(auto v : Vec){
+        cout << v << "\t";
+    }
+    cout << endl;
+}
+
 void Solution::BubbleSort(vector<int> &vec)
 {
     for(int i = 0; i < vec.size() - 1; ++i){
@@ -40,12 +48,12 @@ int Solution::PartSort(vector<int> &vec, int begin, int end)
     return begin;
 }
 
-void Solution::QuickSort(vector<int> &Vec, int start, int final)
+void Solution::FastSort(vector<int> &Vec, int start, int final)
 {
     if(start < final){
         int div = PartSort(Vec, start, final - 1);
-        QuickSort(Vec, start, div);
-        QuickSort(Vec, div + 1, final);
+        FastSort(Vec, start, div);
+        FastSort(Vec, div + 1, final);
     }
 }
 
@@ -72,12 +80,81 @@ int Solution::GetMid(vector<int> &Vec, int l, int r)
     }
 }
 
-void Solution::DisplayVec(vector<int> &Vec)
+void Solution::quickSort(vector<int> &vec)
 {
-    for(auto v : Vec){
-        cout << v << "\t";
+    quickSort(vec, 0, vec.size() - 1);
+}
+
+void Solution::quickSort(vector<int> &vec, int start, int end)
+{
+    if(start >= end) 
+        return ;
+
+    int mid = Partition(vec, start, end);
+
+    quickSort(vec, start, mid - 1);
+    quickSort(vec, mid + 1, end);
+}
+
+int Solution::Partition(vector<int> &vec, int start, int end)
+{
+    {
+        int pivot = vec[start];
+        int left = start + 1;
+        int right = end;
+        while(left < right){
+            while(left < right && vec[left] <= pivot)
+                left++;
+
+            if(left != right){
+                Exchange(vec, left, right);
+                right--;
+            }
+        }
+        if(left == right && vec[right] > pivot)    
+            right--;
+            
+        if(left != start)
+            Exchange(vec, start, right);
+
+        return right;
+
     }
-    cout << endl;
+
+    // { // 双指针
+
+    //     // 取第一个数为基数
+    //     int pivot = vec[start];
+    //     // 从第二个数开始分区
+    //     int left = start + 1;
+    //     // 右边界
+    //     int right = end;
+    //     while (left < right) {
+    //         // 找到第一个大于基数的位置
+    //         while (left < right && vec[left] <= pivot) left++;
+    //         // 找到第一个小于基数的位置
+    //         while (left < right && vec[right] >= pivot) right--;
+    //         // 交换这两个数，使得左边分区都小于或等于基数，右边分区大于或等于基数
+    //         if (left < right) {
+    //             Exchange(vec, left, right);
+    //             left++;
+    //             right--;
+    //         }
+    //     }
+    //     // 如果 left 和 right 相等，单独比较 arr[right] 和 pivot
+    //     if (left == right && vec[right] > pivot) right--;
+    //     // 将基数和轴交换
+    //     Exchange(vec, start, right);
+    //     return right;
+    // }
+
+}
+
+void Solution::Exchange(vector<int> &vec, int i, int j)
+{
+    int tmp = vec[i];
+    vec[i] = vec[j];
+    vec[j] = tmp;
 }
 
 LinkNode* Solution::removeElement(LinkNode* head, int val)

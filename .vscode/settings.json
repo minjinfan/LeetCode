@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "array": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp",
+        "tuple": "cpp",
+        "atomic": "cpp",
+        "utility": "cpp"
     }
 }

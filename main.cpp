@@ -41,9 +41,9 @@ int main(int argc, char** argv)
 
     vector<int> Vec = { 3, 6, 8, 1, 7, 9, 5, 2,4 };
     sl.DisplayVec(Vec);
-    int size = Vec.size();
-    // sl.QuickSort(Vec, 0, size);
-    sl.BubbleSort(Vec);
+ 
+    sl.quickSort(Vec);
+    // sl.BubbleSort(Vec);
     sl.DisplayVec(Vec);
 
     return 0;

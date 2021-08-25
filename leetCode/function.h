@@ -21,11 +21,14 @@ public:
     void BubbleSort(vector<int> &vec);
 
     // 快排
-    void QuickSort(vector<int> &Vec, int start, int final);
+    void FastSort(vector<int> &Vec, int start, int final);
     int PartSort(vector<int> &vec, int begin, int end);
     int GetMid(vector<int> &Vec, int l, int r);
 
-
+    void quickSort(vector<int> &vec);
+    void quickSort(vector<int> &vec, int start, int end);
+    int Partition(vector<int> &vec, int start, int end);
+    void Exchange(vector<int> &vec, int i, int j);
 
 
     /****************************************    链表    ****************************************/
