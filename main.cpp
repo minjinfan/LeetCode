@@ -16,7 +16,8 @@ int main(int argc, char** argv)
 
 
     string ss = "aaa<2>bbbbb</>abcd";
-    char c = itview.StringLengthCalculationAndInterception(ss);
+    // char c = itview.StringLengthCalculationAndInterception(ss);
+    itview.BuyTicket();
     
 
     return 0;

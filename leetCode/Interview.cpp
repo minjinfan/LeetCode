@@ -22,6 +22,8 @@ vector<string> Interview::split(const string& str,const string& delim) { //将�
 
 char Interview::StringLengthCalculationAndInterception(string str)
 {
+    // 难点在于 12点 为 am
+
     string ss = str;
 
     // string ss = "aaa<2>bbbbb</>abcd";
@@ -83,4 +85,85 @@ char Interview::StringLengthCalculationAndInterception(string str)
     cout << ress << endl;
 
     return ress;
+}
+
+
+int Interview::BuyTicket()
+{   
+    int low;
+    cin >> low;
+    while(low--){
+        int nums;
+        cin >> nums;
+        vector<int> A(nums, -1);
+        vector<int> B(nums, -1);
+        vector<int> dp(nums, 0);
+        for(int i = 0; i < nums; ++i){
+            cin >> A[i];
+        }
+        if(nums == 0){
+            cout << "08:00:00 am" << endl;
+            continue;
+        }
+        else if(nums <= 1){
+            dp[0] = A[0];
+        }else{
+            int b;
+            for(int i = 1; i < nums; ++i){
+                cin >> B[i];
+            }
+            // vector<int> dp(nums, 0);
+            dp[0] = A[0];
+            dp[1] = min(dp[0] + A[1], B[1]);
+            for(int i = 2; i < nums; ++i){
+                dp[i] = min(dp[i-1] + A[i], dp[i-2] + B[i]);
+            }
+        }
+
+        int allTime = dp[nums - 1];
+        int sec = allTime % 60;
+        int min = allTime / 60;
+        int hour = 0;
+
+        if(min >= 60){
+            hour = min / 60;
+            min = min % 60;
+        }
+        hour += 8;
+        if(hour <= 12){
+            string h = to_string(hour);
+            if(hour < 10){
+                h = '0' + h;
+            }
+            string m = to_string(min);
+            if(min < 10){
+                m = '0' + m;
+            }
+            string s = to_string(sec);
+            if(sec < 10){
+                s = '0' + s;
+            }
+            cout << h + ":" + m + ":" + s + " am" << endl;
+        }else{
+            string h = to_string(hour);
+ 
+            if(hour > 12){
+                h = to_string(hour - 12);
+                if(hour - 12 < 10){
+                    h = '0' + h;
+                }
+            }
+            string m = to_string(min);
+            if(min < 10){
+                m = '0' + m;
+            }
+            string s = to_string(sec);
+            if(sec < 10){
+                s = '0' + s;
+            }
+            cout << h + ":" + m + ":" + s + " pm" << endl;
+        }
+    }
+    
+    return 0;
 }
