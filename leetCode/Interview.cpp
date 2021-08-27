@@ -1,5 +1,56 @@
 #include"Interview.h"
 
+
+int Interview::input5()
+{
+int lows;
+cin >> lows;
+while(lows--){
+    int num;
+    int sum = 0;
+    cin >> num;
+    while(num--){
+        int a;
+        cin >> a;
+        sum += a;
+    }
+    cout << sum << endl;
+}
+}
+
+int Interview::input6()
+{
+    string str;
+    int num;
+    while(cin >> num){
+        int sum = 0;
+        int a;
+        while(cin.get() != '\n'){
+            cin >> a;
+            sum += a;
+        }
+        cout << sum << endl;
+        
+    }
+}
+
+int Interview::input7()
+{
+    string str;
+    int num;
+    int sum = 0;
+    while(cin >> num){
+        sum += num;
+        
+        if(cin.get() == '\n'){
+            cout << sum << endl;
+            sum = 0;
+        }
+
+    }
+}
+
+
 vector<string> Interview::split(const string& str,const string& delim) { //将分割后的子字符串存储在vector中
 	vector<string> res;
 	if("" == str) return  res;
