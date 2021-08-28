@@ -17,7 +17,11 @@ int main(int argc, char** argv)
 
     string ss = "aaa<2>bbbbb</>abcd";
     // char c = itview.StringLengthCalculationAndInterception(ss);
-    itview.BuyTicket();
+    // itview.BuyTicket();
+
+    int m = 2, n = 3, k = 4;
+    bool visited[m][n][k + 1];
+    memset(visited, false, sizeof(visited));
     
 
     return 0;

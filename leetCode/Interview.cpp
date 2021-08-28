@@ -218,3 +218,153 @@ int Interview::BuyTicket()
     
     return 0;
 }
+
+struct pos_remain           //自己定义一个   也可以用tuple
+{
+    int r, c;
+    int remain_step;
+    pos_remain(int x, int y, int z) : r(x), c(y), remain_step(z) {}
+};
+
+int Interview::shortestPath(vector<vector<int>>& grid, int k) {
+   int R = grid.size(),    C = grid[0].size();
+    if(R == 1 && C ==1)
+        return 0;
+    if (k >= R + C - 2)                                                             //贴着边走就行了，障碍全清楚
+        return R + C - 2;
+    k = std::min(k, R + C - 2);
+    int dirs[4][2] = {{-1,0},{0,1},{1,0},{0,-1}};
+    bool visited[R][C][k + 1];      memset(visited, false, sizeof(visited));        //比vector好用太多！！！！！！！！！！！！！！！！！！
+    queue<pos_remain> Q;                                                            //元素类型自己定义一个 多练练手   也可以用tuple  tuple就是取数据，解压的时候麻烦一点点  可以tie  也可以 get<0,1,2>(it)
+    Q.emplace(0, 0, k);     visited[0][0][k] = true;                                //emplace很好用
+    int level = 1;
+    while(!Q.empty())                                                //记忆化BFS 波纹法！！！！！！标准框架
+    {
+        int cur_len = Q.size();
+        for (int ee = 0; ee < cur_len; ee ++)                          //波纹法
+        {
+            pos_remain cur = Q.front();     Q.pop();
+            int cur_r = cur.r,   cur_c = cur.c,   cur_remain_step = cur.remain_step;
+            for (int d=0; d<4; d++)
+            {
+                int dr = dirs[d][0],    dc = dirs[d][1];
+                int nr = cur_r + dr,    nc = cur_c + dc;
+                if (0<=nr && nr<R && 0<=nc && nc<C)
+                {
+                    if (grid[nr][nc] == 0 && visited[nr][nc][cur_remain_step]==false)   //没有障碍  直接上
+                    {
+                        if (nr == R-1 && nc == C-1)                                     //走到右下角终点了
+                            return level;
+                        Q.emplace(nr, nc, cur_remain_step);                             //普通情况
+                        visited[nr][nc][cur_remain_step] = true;
+                    }
+                    else if (grid[nr][nc]==1 && cur_remain_step > 0 && visited[nr][nc][cur_remain_step - 1] == false )  //有障碍的时候
+                    {
+                        visited[nr][nc][cur_remain_step - 1] = true;
+                        Q.emplace(nr, nc, cur_remain_step - 1);
+                    }
+                }
+            }
+        }
+        level += 1;
+    }
+    return -1;
+}
+
+
+bool Interview::Track(int &mainA, int &mainB, int &mainC, monster &m)
+{
+    int harm = mainA - m.B;
+                
+    if(harm < 0 && m.A > 0){
+        return false;
+    }
+        
+    if(harm >= m.C){
+        mainC += harm - m.C;
+        m.C -= harm;
+    }else{
+        m.C -= harm;
+    }
+
+    return true;
+}
+
+bool Interview::defende(int &mainA, int &mainB, int &mainC, monster &m, int &add)
+{
+    int harm = m.A - mainB;
+                
+    if(harm < 0){
+        return true;
+    }
+
+    if(harm >= 0){
+        mainC -= harm;
+        if(mainC <= 0){
+            add += 1 - mainC;
+            mainC = 1;
+        }
+        // cout << "defende: " << mainC << endl;
+    }   
+
+    return true;
+}
+
+
+int Interview::FightMonsters()
+{
+    int T, nums;
+    cin >> T;
+    
+    int add = 0;
+    int mainA , mainB, mainC = 0;
+    vector<int> res(T);
+    // while(T--){
+    for(int i = 0; i < T; ++i){
+        add = 0;
+        cin >> nums;
+        cin >> mainA ;
+        cin >> mainB;
+        vector<monster> mon(nums);
+        int a, b, c;
+        for(int i = 0; i < nums; ++i){
+            cin >> a ;
+            cin >> b ;
+            cin >> c;
+            mon[i] = monster(a,b,c);
+        }
+        
+        sort(mon.begin(), mon.end(), cmp);
+        for(monster &m : mon){
+
+            bool Islive = true;
+            while(1){
+                Islive = Track(mainA, mainB, mainC, m);
+                if(!Islive){
+                    add = -1;
+                    break;
+                }
+                   
+                if(m.C <= 0)
+                    break;
+                defende(mainA, mainB, mainC, m, add);
+
+            }
+            if(!Islive){
+                add = -1;
+                break;
+            }
+
+        }
+        // cout << endl;
+        // cout << mainC << endl;
+        // cout << add << endl;
+        res[i] = add;
+    }
+
+    for(int i = 0; i < res.size(); ++i){
+        cout << res[i] << endl;
+    }
+    
+    return 0;
+}

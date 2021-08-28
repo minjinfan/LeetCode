@@ -5,6 +5,7 @@
 #include <string.h>
 #include <string>
 #include <vector>
+#include <queue>
 #include <map>
 #include <algorithm>
 #include <math.h>
@@ -14,6 +15,7 @@
 // #include "Common.hpp"
 using namespace std;
 
+struct monster;
 class Interview
 {
 public:
@@ -58,7 +60,32 @@ public:
         时间的数字要保持 2 位，若是上午结束，是 am ，下午结束是 pm
     */
    int BuyTicket();
+
+
+
+    int shortestPath(vector<vector<int>>& grid, int k);
+
+
+
+    // 回合制打怪兽
+    int FightMonsters();
+    bool defende(int &mainA, int &mainB, int &mainC, monster &m, int &add);
+    bool Track(int &mainA, int &mainB, int &mainC, monster &m);
 };
+
+struct monster
+{
+    int A;
+    int B;
+    int C;
+    monster(){}
+    monster(int a, int b, int c) : A(a), B(b), C(c) {}
+};
+
+bool cmp(monster a, monster b){
+    return a.C < b.C;
+}
+
 
 
 #endif  // INTERVIEW_H_
