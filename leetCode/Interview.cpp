@@ -50,6 +50,23 @@ int Interview::input7()
     }
 }
 
+int Interview::input10()
+{
+    string s;
+    while(getline(cin, s)){
+        stringstream ss(s);
+        vector<string> vec;
+        while(getline(ss, s, ',')){
+            vec.push_back(s);
+        }
+        sort(vec.begin(), vec.end());
+        for(int i = 0; i < vec.size() - 1; ++i){
+            cout << vec[i] << ",";
+        }
+        cout << vec[vec.size() - 1] << endl;;
+    }
+    return 0;
+}
 
 vector<string> Interview::split(const string& str,const string& delim) { //将分割后的子字符串存储在vector中
 	vector<string> res;
@@ -367,4 +384,92 @@ int Interview::FightMonsters()
     }
     
     return 0;
+}
+bool Interview::EscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target) {
+    
+    int next[4][2] = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+    int start_x = source[0];   int start_y = source[1];
+    int end_x = target[0];     int end_y = target[1];
+
+    int limit = 1e6;
+    unordered_map<long long, bool> visited;
+    for(int i = 0; i < blocked.size(); ++i){
+        visited[(long long )blocked[i][0] * limit + blocked[i][1]] = true;
+    }
+
+    queue<pair<int, int>> Q;
+    Q.push({start_x, start_y});
+    while(!Q.empty()){
+        int size = Q.size();
+        if(size > blocked.size())
+            return true;
+        while(size--){
+            pair<int,int> tmp = Q.front();
+            Q.pop();
+
+            int curX = tmp.first;   int curY = tmp.second;
+
+            for(int i = 0; i < 4; ++i){
+                int newX = curX + next[i][0];
+                int newY = curY + next[i][1];
+
+                if(newX >=0 && newX < 1e6 && newY >= 0 && newY < 1e6 && !visited[(long long)newX * limit + newY]){
+                    if(newX == end_x && newY == end_y)
+                        return true;
+                    Q.push({newX, newY});
+                    visited[(long long)newX * limit + newY] = true;
+                }
+            }
+
+
+        }
+
+    }
+    
+    return false;
+}
+
+
+bool Interview::isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target){
+    if(blocked.empty())
+        return true;
+    
+    bool res2 = EscapePossible(blocked, target, source);
+    bool res1 = EscapePossible(blocked, source, target);
+    return res1 && res2;
+}
+
+
+void Interview::transfrom(char &c, int i, long long int &res){
+    switch(c){
+        case 'A':
+            res += 10 * pow(16, i); break;
+        case 'B':
+            res += 11 * pow(16,i); break;
+        case 'C':
+            res += 12 * pow(16,i); break;
+        case 'D':
+            res += 13 * pow(16,i); break;
+        case 'E':
+            res += 14 * pow(16,i); break;
+        case 'F':
+            res += 15 * pow(16,i); break;
+        default:
+           int a = c - '0';
+           res += a * pow(16, i);
+    }
+}
+void Interview::BaseConversion_HtoD()
+{
+    string str;
+    while(cin >> str){
+        string ox = str.substr(2,str.length() - 2);
+        int size = ox.length();
+        long long int res = 0;
+        for(int i = size - 1, j = 0; i >= 0; --i, ++j){
+            transfrom(ox[i], j, res);
+        } 
+        str = to_string(res);
+        cout << str << endl;
+    }
 }
