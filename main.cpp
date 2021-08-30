@@ -19,9 +19,7 @@ int main(int argc, char** argv)
     // char c = itview.StringLengthCalculationAndInterception(ss);
     // itview.BuyTicket();
 
-    int m = 2, n = 3, k = 4;
-    bool visited[m][n][k + 1];
-    memset(visited, false, sizeof(visited));
+    itview.Sudoku();
     
 
     return 0;

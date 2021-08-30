@@ -104,6 +104,12 @@ public:
     // 1036. 逃离大迷宫  有障碍
     bool EscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
     bool isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
+
+
+    // 数独
+    bool Sudoku_check(vector<vector<int>> &vec, int x, int y, int val);
+    bool Sudoku_DFS(vector<vector<int>>  &vec, int n);
+    void Sudoku();
 };
 
 
@@ -121,10 +127,21 @@ struct monster
     monster(int a, int b, int c) : A(a), B(b), C(c) {}
 };
 
-bool cmp(monster a, monster b){
+static bool monster_cmp(monster a, monster b){
     return a.C < b.C;
-}
+};
 
+static int Sudoku_a[9][9] ={
+  {7,2,6,9,0,4,0,5,1},
+  {0,8,0,6,0,7,4,3,2},
+  {3,4,1,0,8,5,0,0,9},
+  {0,5,2,4,6,8,0,0,7},
+  {0,3,7,0,0,0,6,8,0},
+  {0,9,0,0,0,3,0,1,0},
+  {0,0,0,0,0,0,0,0,0},
+  {9,0,0,0,2,1,5,0,0},
+  {8,0,0,3,0,0,0,0,0}
+};
 
 
 #endif  // INTERVIEW_H_

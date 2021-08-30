@@ -3,19 +3,21 @@
 
 int Interview::input5()
 {
-int lows;
-cin >> lows;
-while(lows--){
-    int num;
-    int sum = 0;
-    cin >> num;
-    while(num--){
-        int a;
-        cin >> a;
-        sum += a;
+    int lows;
+    cin >> lows;
+    while(lows--){
+        int num;
+        int sum = 0;
+        cin >> num;
+        while(num--){
+            int a;
+            cin >> a;
+            sum += a;
+        }
+        cout << sum << endl;
     }
-    cout << sum << endl;
-}
+
+    return 0;
 }
 
 int Interview::input6()
@@ -32,6 +34,7 @@ int Interview::input6()
         cout << sum << endl;
         
     }
+    return 0;
 }
 
 int Interview::input7()
@@ -48,6 +51,7 @@ int Interview::input7()
         }
 
     }
+    return 0;
 }
 
 int Interview::input10()
@@ -351,7 +355,7 @@ int Interview::FightMonsters()
             mon[i] = monster(a,b,c);
         }
         
-        sort(mon.begin(), mon.end(), cmp);
+        sort(mon.begin(), mon.end(), monster_cmp);
         for(monster &m : mon){
 
             bool Islive = true;
@@ -473,3 +477,68 @@ void Interview::BaseConversion_HtoD()
         cout << str << endl;
     }
 }
+
+
+
+bool Interview::Sudoku_check(vector<vector<int>> &vec, int x, int y, int val)
+{
+    for(int i = 1; i < 9; ++i){
+        if(vec[x][i] == val || vec[i][y] == val){
+            return false;
+        }
+    }
+    int cube_x = x / 3 * 3;
+    int cube_y = y / 3 *3;
+    for(int i = cube_x; i < cube_x + 3; ++i){
+        for(int j = cube_y; j < cube_y + 3; ++j){
+           if(vec[i][j] == val)
+                return false;
+        }
+    }
+    return true;
+}
+bool Interview::Sudoku_DFS(vector<vector<int>> &vec, int n)
+{
+    int x = n / 9;
+    int y = n % 9;
+    if(n > 80){
+        return true;
+    }
+    if(vec[x][y] != 0){
+        return Sudoku_DFS(vec, n + 1);
+    }
+    else{
+        for(int i = 1; i <= 9; ++i){
+            if(Sudoku_check(vec, x, y, i)){
+                vec[x][y] = i;
+                if(Sudoku_DFS(vec, n + 1) )
+                    return true;
+                vec[x][y] = 0;
+            }
+        }
+     
+    }
+
+    return false;
+
+}
+void Interview::Sudoku()
+{
+    // int vec[9][9];
+    vector<vector<int>> V(9,vector<int>(9));
+    for(int i = 0; i < 9; ++i){
+        for(int j = 0; j < 9; ++j){
+            V[i][j] = Sudoku_a[i][j];
+        }
+    }
+
+    Sudoku_DFS(V, 0);
+
+    for(int i = 0; i < 9; ++i){
+        for(int j = 0; j < 8; ++j){
+            cout << V[i][j] << " ";
+        }
+        cout << V[i][8] << endl;
+    }
+}
+
