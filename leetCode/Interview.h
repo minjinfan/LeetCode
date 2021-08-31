@@ -131,6 +131,7 @@ public:
     coor EscapePossible_end ;
     int  NumEP = 0;   int EscapePossible_R;    int EscapePossible_C;
     vector<vector<bool>> blocked;
+    vector<vector<pair<int, int>>> pathEP;
     void NumberEscapePossible();
     void NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &start);
 

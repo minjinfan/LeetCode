@@ -448,6 +448,18 @@ void Interview::NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &st
 {
     if(start == EscapePossible_end){
         NumEP++;
+        for(int i = 0; i < EscapePossible_R; ++i){
+            for(int j = 0; j < EscapePossible_C; ++j){
+                // if( i == EscapePossible_R-1 && j == EscapePossible_C-1){
+                //     cout << "(" << pathEP[i][j].first << ", " << pathEP[i][j].second << ")" ;
+                // }
+                // else 
+                if(pathEP[i][j].first != -1){
+                    cout << "(" << pathEP[i][j].first << ", " << pathEP[i][j].second << ")" << " -->";
+                }
+            }
+        }
+        cout << "(" << EscapePossible_end.x << ", " << EscapePossible_end.y << ")" << endl;
         return ;
     }
 
@@ -466,8 +478,10 @@ void Interview::NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &st
             coor tmp = coor(newX, newY);
 
             visited[newX][newY] = true;
+            pathEP[newX][newY] = pair<int, int>(curX, curY);
             NumberEscapePossible_DFS(visited, tmp);
             visited[newX][newY] = false;
+            pathEP[newX][newY] = pair<int, int>(-1, -1);
         // }
 
     }
@@ -481,6 +495,10 @@ void Interview::NumberEscapePossible()
     EscapePossible_start = coor(0,0);
     EscapePossible_end = coor(EscapePossible_R - 1,EscapePossible_C - 1);
 
+    pathEP.resize(EscapePossible_R);//n行
+    for (int i = 0; i < EscapePossible_R; ++i){
+        pathEP[i].resize(EscapePossible_C, pair<int, int>(-1, -1));//每行为m列
+    }
     
     vector<vector<bool>> visited(EscapePossible_R, vector<bool>(EscapePossible_C, false));
     vector<vector<bool>> blocked(EscapePossible_R, vector<bool>(EscapePossible_C, false));
@@ -495,6 +513,17 @@ void Interview::NumberEscapePossible()
     this->blocked = blocked;
     NumberEscapePossible_DFS(visited, EscapePossible_start);
     cout << NumEP << endl;
+
+    // for(int i = 0; i < EscapePossible_R; ++i){
+    //     for(int j = 0; j < EscapePossible_C; ++j){
+    //         if( i == EscapePossible_R-1 && j == EscapePossible_C-1){
+    //             cout << pathEP[i][j].first << ", " << pathEP[i][j].second ;
+    //         }
+    //         else if(pathEP[i][j].first != -1){
+    //             cout << "(" << pathEP[i][j].first << ", " << pathEP[i][j].second << ")" << " -->";
+    //         }
+    //     }
+    // }
 
 }
 
