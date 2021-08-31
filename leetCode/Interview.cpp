@@ -542,3 +542,75 @@ void Interview::Sudoku()
     }
 }
 
+
+int Interview::ChefCooking()
+{
+    vector<int> a = {2,2,5,6,4,2,4,6,5,2,3,3,3,3,4,6,1,5,1,1,7};
+    int t;
+
+    //vector<int> vec;
+    queue<int> Q;
+    // while(cin >> t){
+    //     Q.push(t);
+    // }
+    for(auto t : a){
+        if(t == 0) continue;
+        if(t == 7) break;
+        Q.push(t);
+    }
+    int sum = 0;
+
+    multiset<int> Kitchen;
+    queue<int> used;
+    // map<int, int> Kitchen;
+    while(!Q.empty()){
+
+        int f = Q.front();
+        Q.pop();
+
+        if(Kitchen.size() < 3){
+        
+            Kitchen.insert(f);
+            // Kitchen.insert(pair<int, int>(food, 1));
+            sum += 16;
+
+            used.push(f);
+        }
+        else if (!Kitchen.count(f)){
+
+            int old = used.front();
+            used.pop();
+            set<int>::iterator it = Kitchen.find(old);
+            Kitchen.erase(it);
+            sum += 6;
+
+            Kitchen.insert(f);
+            used.push(f);
+            sum += 15;
+        }
+        else{
+ 
+            queue<int> tmp; 
+            while(!used.empty()){
+                int use = used.front();
+                used.pop();
+                if(use = f)
+                    continue;
+                tmp.push(use);
+            }
+            while(!tmp.empty()){
+                int t = tmp.front();
+                tmp.pop();
+                used.push(t);
+            }
+            
+            used.push(f);
+            sum += 15;
+
+        }
+    }
+
+    cout << sum << endl;
+    
+    return 0;
+}

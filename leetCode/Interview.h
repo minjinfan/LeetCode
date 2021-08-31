@@ -7,6 +7,7 @@
 #include <vector>
 #include <queue>
 #include <map>
+#include <set>
 #include <unordered_map>
 #include <algorithm>
 #include <math.h>
@@ -83,6 +84,8 @@ public:
     bool Track(int &mainA, int &mainB, int &mainC, monster &m);
 
 
+    // 厨师煮饭
+    int ChefCooking();
 
 
     /****************************************    DP  网格   迷宫   ****************************************/
