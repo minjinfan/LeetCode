@@ -391,7 +391,7 @@ int Interview::FightMonsters()
 }
 bool Interview::EscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target) {
     
-    int next[4][2] = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+    // int next[4][2] = {{0,1}, {0,-1}, {1,0}, {-1,0}};
     int start_x = source[0];   int start_y = source[1];
     int end_x = target[0];     int end_y = target[1];
 
@@ -441,6 +441,61 @@ bool Interview::isEscapePossible(vector<vector<int>>& blocked, vector<int>& sour
     bool res2 = EscapePossible(blocked, target, source);
     bool res1 = EscapePossible(blocked, source, target);
     return res1 && res2;
+}
+
+
+void Interview::NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &start)
+{
+    if(start == EscapePossible_end){
+        NumEP++;
+        return ;
+    }
+
+    int curX = start.x;
+    int curY = start.y;
+    if(visited[curX][curY] && blocked[curX][curY])
+        return ;
+
+    for(int i = 0; i < 2; ++i){
+        int newX = curX + next2[i][0];
+        int newY = curY + next2[i][1];
+
+        if(newX < 0 || newX > EscapePossible_R - 1 || newY < 0 || newY > EscapePossible_C - 1)
+            continue;
+        // if(!visited[newX][newY] && !blocked[newX][newY]){
+            coor tmp = coor(newX, newY);
+
+            visited[newX][newY] = true;
+            NumberEscapePossible_DFS(visited, tmp);
+            visited[newX][newY] = false;
+        // }
+
+    }
+    
+}
+void Interview::NumberEscapePossible()
+{
+    // Possible_a 
+    EscapePossible_R = Possible_a.size();
+    EscapePossible_C = Possible_a[0].size();
+    EscapePossible_start = coor(0,0);
+    EscapePossible_end = coor(EscapePossible_R - 1,EscapePossible_C - 1);
+
+    
+    vector<vector<bool>> visited(EscapePossible_R, vector<bool>(EscapePossible_C, false));
+    vector<vector<bool>> blocked(EscapePossible_R, vector<bool>(EscapePossible_C, false));
+    for(int i = 0; i < EscapePossible_R; ++i){
+        for(int j = 0; j < EscapePossible_C; ++j){
+            if(Possible_a[i][j] == 1){
+                blocked[i][j] = true;
+            }
+        }
+    }
+    visited[0][0] = true;
+    this->blocked = blocked;
+    NumberEscapePossible_DFS(visited, EscapePossible_start);
+    cout << NumEP << endl;
+
 }
 
 

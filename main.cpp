@@ -19,7 +19,9 @@ int main(int argc, char** argv)
     // char c = itview.StringLengthCalculationAndInterception(ss);
     // itview.BuyTicket();
 
-    itview.Sudoku();
+    // itview.Sudoku();
+
+    itview.NumberEscapePossible();
     
 
     return 0;

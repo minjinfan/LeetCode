@@ -15,8 +15,22 @@
 #include <sstream>
 #include <utility>
 
+
 // #include "Common.hpp"
 using namespace std;
+
+struct coor{
+    int x;
+    int y;
+    coor(){}
+    coor(int x_, int y_) : x(x_), y(y_) {} 
+
+    bool operator==(const coor &s) const
+    {
+        return (s.x == x) && (s.y == y);
+    }
+
+};
 
 struct monster;
 class Interview
@@ -90,6 +104,9 @@ public:
 
     /****************************************    DP  网格   迷宫   ****************************************/
 
+    int next[4][2] = {{1,0}, {-1,0}, {0,1}, {0, -1}};
+    int next2[2][2] = {{1,0},  {0,1}};
+
     /*
         给你一个 m * n 的网格，其中每个单元格不是 0（空）就是 1（障碍物）。每一步，您都可以在空白单元格中上、下、左、右移动。
         如果您 最多 可以消除 k 个障碍物，请找出从左上角 (0, 0) 到右下角 (m-1, n-1) 的最短路径，并返回通过该路径所需的步数。如果找不到这样的路径，则返回 -1。
@@ -107,6 +124,15 @@ public:
     // 1036. 逃离大迷宫  有障碍
     bool EscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
     bool isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
+
+
+    // 从起点出发达到终点的路线个数
+    coor EscapePossible_start ;
+    coor EscapePossible_end ;
+    int  NumEP = 0;   int EscapePossible_R;    int EscapePossible_C;
+    vector<vector<bool>> blocked;
+    void NumberEscapePossible();
+    void NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &start);
 
 
     // 数独
@@ -134,6 +160,34 @@ static bool monster_cmp(monster a, monster b){
     return a.C < b.C;
 };
 
+static vector<vector<int>> Possible_a ={
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,0,0,0,0,0,0,0}
+
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,1,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0}
+};
+
+// static vector<vector<int>> Possible_a = {
+//   {0,1,0,},
+//   {0,1,0,},
+//   {0,0,0,}
+// };
+
 static int Sudoku_a[9][9] ={
   {7,2,6,9,0,4,0,5,1},
   {0,8,0,6,0,7,4,3,2},
@@ -145,6 +199,7 @@ static int Sudoku_a[9][9] ={
   {9,0,0,0,2,1,5,0,0},
   {8,0,0,3,0,0,0,0,0}
 };
+
 
 
 #endif  // INTERVIEW_H_
