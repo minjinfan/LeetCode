@@ -92,6 +92,7 @@ public:
     void transfrom(char &c, int i, long long int &res);
     void BaseConversion_HtoD();
 
+
     // 回合制打怪兽
     int FightMonsters();
     bool defende(int &mainA, int &mainB, int &mainC, monster &m, int &add);
@@ -101,11 +102,34 @@ public:
     // 厨师煮饭
     int ChefCooking();
 
+    
+    /*
+     有一个数组a[N]顺序存放0~N-1，要求  每隔两个数  删掉一个数，到末尾时循环至开头继续进行，求最后一个被删掉的数的原始下标位置。
+     以8个数(N=7)为例:｛0，1，2，3，4，5，6，7｝，0->1->2(删除)->3->4->5(删除)->6->7->0(删除),如此循环直到最后一个数被删除。
+    */
+    // 删数  
+    int DeleteNum();
+
+
+    // 扑克牌游戏
+    int PokerGame();
+
+    /*
+        1.记录最多8条错误记录，对相同的错误记录(即文件名称和行号完全匹配)只记录一条，错误计数增加；(文件所在的目录不同，文件名和行号相同也要合并)
+        2.超过16个字符的文件名称，只记录文件的最后有效16个字符；(如果文件名不同，而只是文件名的后16个字符和行号相同，也不要合并)
+        3.输入的文件可能带路径，记录文件名称不能带路径
+    */
+    // 简单错误记录
+    int Errorlog();
+
+
+
 
     /****************************************    DP  网格   迷宫   ****************************************/
 
     int next[4][2] = {{1,0}, {-1,0}, {0,1}, {0, -1}};
     int next2[2][2] = {{1,0},  {0,1}};
+
 
     /*
         给你一个 m * n 的网格，其中每个单元格不是 0（空）就是 1（障碍物）。每一步，您都可以在空白单元格中上、下、左、右移动。
@@ -121,7 +145,7 @@ public:
         每次移动，都可以走到网格中在四个方向上相邻的方格，只要该方格 不 在给出的封锁列表 blocked 上。同时，不允许走出网格。
         只有在可以通过一系列的移动从源方格 source 到达目标方格 target 时才返回 true。否则，返回 false
     */
-    // 1036. 逃离大迷宫  有障碍
+    // 1036. 能否逃离大迷宫  有障碍
     bool EscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
     bool isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
 
@@ -131,7 +155,7 @@ public:
     coor EscapePossible_end ;
     int  NumEP = 0;   int EscapePossible_R;    int EscapePossible_C;
     vector<vector<bool>> blocked;
-    vector<vector<pair<int, int>>> pathEP;
+    vector<vector<pair<int, int>>> pathEP;    // 路径
     void NumberEscapePossible();
     void NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &start);
 
@@ -169,7 +193,7 @@ static vector<vector<int>> Possible_a ={
 //   {0,0,1,0,0,0,0,0,0},
 //   {0,0,1,0,0,0,0,0,0},
 //   {0,0,1,0,0,0,0,0,0},
-//   {0,0,1,0,0,0,0,0,0},
+//   {0,0,0,0,0,0,0,0,0},
 //   {0,0,0,0,0,0,0,0,0}
 
     {0,1,0,0,0,0,0,0,0},
@@ -179,7 +203,7 @@ static vector<vector<int>> Possible_a ={
     {0,1,0,0,0,0,0,0,0},
     {0,1,0,0,0,0,0,0,0},
     {0,1,0,0,0,0,0,0,0},
-    {0,1,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0}
 };
 

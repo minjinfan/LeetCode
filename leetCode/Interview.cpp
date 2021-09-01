@@ -698,3 +698,151 @@ int Interview::ChefCooking()
     
     return 0;
 }
+
+
+struct record{
+    string filename;
+    int col;
+    int cnt;
+};
+bool cmp(record r1,record r2)
+{
+    return r1.cnt>r2.cnt;
+}
+
+int Interview::Errorlog()
+{
+    string file;
+    int column;
+    record r[100];
+    int count=0,i=0;
+    while(cin>>file>>column)
+    {
+        string f=file.substr(file.rfind('\\')+1);
+        //recor里面还未记录的文件名
+        int flag=0;
+        for(int j = 0;j<count;j++)
+        {
+            if(r[j].filename==f && r[j].col==column)
+            {
+                r[j].cnt++;
+                flag=1;
+                break;
+            }
+        }
+        if(!flag)
+        {
+            r[count].filename=f;
+            r[count].col=column;
+            r[count].cnt=1;
+            count++;
+        }
+         
+    }
+    sort(&r[0],&r[count],cmp);
+    if(count>8)count=8;
+     
+    for(int j=i;j<count;j++){
+            string f=r[j].filename;
+            if(f.size()>16)f=f.substr(f.size()-16,f.size());
+            cout << f << ' ' << r[j].col << ' ' << r[j].cnt << endl;
+     }
+    return 0;
+}
+
+
+int Interview::DeleteNum()
+{
+    int n;
+    while(cin>>n)
+    {
+        queue<int> q;
+        for(int i=0;i<n;i++)
+        {
+            q.push(i);
+        }
+        int count=0;
+        while(q.size()!=1)
+        {
+            if(count<2)
+            {
+                int b=q.front();
+                q.pop();
+                q.push(b);
+                count++;
+            }
+            else
+            {
+                q.pop();
+                count=0;
+            }
+        }
+        int c=q.front();
+        cout<<c<<endl;
+    }
+    return 0;
+}
+
+
+vector<int> PokerGame_helper(string s){ 
+    vector<int> v; 
+    for(int i=0;i<s.size();i++){ 
+        if(s[i]=='1'){ 
+            v.push_back(10); 
+            i++; 
+        }
+        else if(s[i]=='j'&&i+1<s.size()&&s[i+1]=='o')
+        {
+            v.push_back(16);
+            i += 4;
+        }
+        else if(s[i]=='J'&&i+1<s.size()&&s[i+1]=='O')
+        {
+            v.push_back(17);
+            i += 4;
+        }
+        else if(s[i]=='J') v.push_back(11); 
+        else if(s[i]=='Q') v.push_back(12); 
+        else if(s[i]=='K') v.push_back(13); 
+        else if(s[i]=='A') v.push_back(14); 
+        else if(s[i]=='2') v.push_back(15);
+        else if(s[i]==' ') continue; 
+        else if(s[i]>='3' && s[i] <= '9')v.push_back(s[i]-'0'); 
+    } 
+    return v; 
+} 
+  
+int Interview::PokerGame()
+{
+    string str;
+      
+    while(getline(cin,str)){
+        int pos = str.rfind('-');
+        string s1 = str.substr(0,pos);
+        string s2 = str.substr(pos+1);
+          
+        if(s1 == "joker JOKER" || s2 == "joker JOKER"){
+            cout<<"joker JOKER"<<endl;
+            return 0;
+        }
+          
+        vector<int> v1 = PokerGame_helper(s1);
+        vector<int> v2 = PokerGame_helper(s2);
+          
+        if( v1.size() == 4 && v2.size()==4){
+            if(v1[0]<v2[0])cout<<s2<<endl;
+            else cout<<s1<<endl;
+            return 0;
+        }
+          
+        if(v1.size()==4) cout<<s1<<endl; 
+        else if(v2.size()==4) cout<<s2<<endl; 
+        else if(v1.size()!=v2.size()) cout<<"ERROR"<<endl; 
+        else if(v1[0]<v2[0]) cout<<s2<<endl; 
+        else if(v1[0]>v2[0]) cout<<s1<<endl; 
+        else{ 
+            cout<<"ERROR"<<endl; 
+        } 
+    }
+    return 0;
+}
