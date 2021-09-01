@@ -20,7 +20,11 @@ int main(int argc, char** argv)
 
     // itview.Sudoku();
 
-    itview.NumberEscapePossible();
+    // itview.NumberEscapePossible();
+
+    int a = itview.numIslands();
+    cout << a << endl;
+
     
 
     return 0;

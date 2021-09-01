@@ -699,7 +699,6 @@ int Interview::ChefCooking()
     return 0;
 }
 
-
 struct record{
     string filename;
     int col;
@@ -846,3 +845,90 @@ int Interview::PokerGame()
     }
     return 0;
 }
+
+
+void Interview::numIslands_DFS(vector<vector<string>>& grid, int x, int y)
+{
+    // leetCode 上是 char 类型
+
+    int R = grid.size();
+    int C = grid[0].size();
+
+    grid[x][y] = "0";
+    
+    // if(x-1 >= 0 && grid[x-1][y] == '1') numIslands_DFS(grid, x-1, y);
+    // if(x+1 < R && grid[x+1][y] == '1') numIslands_DFS(grid, x+1, y);
+    // if(y-1 >= 0 && grid[x][y-1] == '1') numIslands_DFS(grid, x, y-1);
+    // if(y+1 < C && grid[x][y+1] == '1') numIslands_DFS(grid, x, y+1);
+
+    for(int i = 0; i < 4; ++i){
+        int newX = x + next[i][0];
+        int newY = y + next[i][1];
+
+        if(newX >= 0 && newX < R && newY >=0 && newY < C && grid[newX][newY] == "1"){
+            numIslands_DFS(grid, newX, newY);
+        }
+    }
+
+
+}
+
+int Interview::numIslands() {
+    // vector<vector<char>>& grid  
+    // leetCode 上是 char 类型
+
+    int R = numIslands_a.size();
+    if(!R)
+        return 0;
+    int C = numIslands_a[0].size();
+
+
+    int Count = 0;
+    for(int i = 0; i < R; ++i){
+        for(int j = 0; j < C; ++j){
+            if(numIslands_a[i][j] == "1"){
+                Count++;
+                numIslands_DFS(numIslands_a, i, j);
+            }
+        }
+    }
+
+    return Count;
+}
+
+
+
+// 二分法 山脉数组中查找目标值
+// int binary_search(MountainArray &mountain, int target, int l, int r, int key(int)) {
+//     target = key(target);
+//     while (l <= r) {
+//         int mid = (l + r) / 2;
+//         int cur = key(mountain.get(mid));
+//         if (cur == target) {
+//             return mid;
+//         } else if (cur < target) {
+//             l = mid + 1;
+//         } else {
+//             r = mid - 1;
+//         }
+//     }
+//     return -1;
+// }
+// int findInMountainArray(int target, MountainArray &mountainArr) {
+//     int l = 0, r = mountainArr.length() - 1;
+//     while (l < r) {
+//         int mid = (l + r) / 2;
+//         if (mountainArr.get(mid) < mountainArr.get(mid + 1)) {
+//             l = mid + 1;
+//         } else {
+//             r = mid;
+//         }
+//     }
+//     int peak = l;
+//     int index = binary_search(mountainArr, target, 0, peak, [](int x) -> int{return x;});
+//     if (index != -1) {
+//         return index;
+//     }
+//     return binary_search(mountainArr, target, peak + 1, mountainArr.length() - 1, [](int x) -> int{return -x;});
+// }
+

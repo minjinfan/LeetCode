@@ -125,6 +125,9 @@ public:
 
 
 
+    // 二分法 山脉数组中查找目标值
+    // int findInMountainArray(int target, MountainArray &mountainArr)
+
     /****************************************    DP  网格   迷宫   ****************************************/
 
     int next[4][2] = {{1,0}, {-1,0}, {0,1}, {0, -1}};
@@ -151,19 +154,26 @@ public:
 
 
     // 从起点出发达到终点的路线个数
+    void NumberEscapePossible();
+    void NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &start);
     coor EscapePossible_start ;
     coor EscapePossible_end ;
     int  NumEP = 0;   int EscapePossible_R;    int EscapePossible_C;
     vector<vector<bool>> blocked;
     vector<vector<pair<int, int>>> pathEP;    // 路径
-    void NumberEscapePossible();
-    void NumberEscapePossible_DFS(vector<vector<bool>> &visited, coor &start);
+
 
 
     // 数独
+    void Sudoku();
     bool Sudoku_check(vector<vector<int>> &vec, int x, int y, int val);
     bool Sudoku_DFS(vector<vector<int>>  &vec, int n);
-    void Sudoku();
+    
+
+
+    // 200. 岛屿数量
+    int numIslands();
+    void numIslands_DFS(vector<vector<string>>& grid, int x, int y);
 };
 
 
@@ -225,6 +235,11 @@ static int Sudoku_a[9][9] ={
   {8,0,0,3,0,0,0,0,0}
 };
 
-
+static vector<vector<string>> numIslands_a ={
+  {"1","1","0","0","0"},
+  {"1","1","0","0","0"},
+  {"0","0","1","0","0"},
+  {"0","0","0","1","1"}
+};
 
 #endif  // INTERVIEW_H_
