@@ -1131,6 +1131,145 @@ int Interview::rectCover(int number) {
     return dp[1];
 }
 
+
+string Interview::longestCommonPrefix(vector<string>& strs) {
+    // write code here
+    if(strs.empty())
+        return "";
+    int row = strs.size();
+    int col = strs[0].size();
+    
+    for(int c = 0; c <= col; ++c){
+        int first = strs[0][c];
+        for(int r = 1; r < row; ++r){
+            if(strs[r][c] != first || strs[r].length() == c){
+                return strs[0].substr(0, c);
+            }
+        }
+    }
+    
+    return strs[0];
+}
+
+
+int Interview::InitialEnergy()
+{
+    
+    int n;
+    while(cin >> n){
+        
+        vector<int> vec(n);
+        for(int i = 0; i < n; ++i){
+            cin >> vec[i];
+        }
+        
+        int dp[n+1];
+        dp[n] = 0;
+        for(int i = n-1; i >= 0; --i){
+            dp[i] = (vec[i] + dp[i + 1]) / 2.0 + 0.5;
+        }
+        cout << dp[0] << endl;
+    }
+    return 0;
+}
+
+
+
+int Interview::CoinDivision()
+{
+    #define mod (int)(1E9+7);
+	int n;
+	cin >> n;
+// 	vector<int> count(n + 1, 1);//只用1就只能有1种方法
+// 	for (int i = 2; i <= n; ++i)//可以有几个2，方法就加几
+// 	{
+// 		count[i] = (count[i] + count[i - 2]) % mod;
+// 	}
+// 	for (int i = 5; i <= n; ++i)//可以有几个5，方法就加几
+// 	{
+// 		count[i] = (count[i] + count[i - 5]) % mod;
+// 	}
+// 	for (int i = 10; i <= n; ++i)//可以有几个10，方法就加几
+// 	{
+// 		count[i] = (count[i] + count[i - 10]) % mod;
+// 	}
+// 	cout << count[n] << endl;
+    
+    int a[5]={0,1,2,5,10};
+    vector<int> dp(n + 1, 1);//只用1就只能有1种方法
+    for(int i = 2; i < 5; i++)
+    {
+        for(int j = a[i]; j<= n; j++)
+        { 
+            dp[j] = ( dp[j] + dp[j-a[i]] ) % mod;
+           
+        }
+    }
+    cout << dp[n] << endl;;
+    
+    return 0;
+}
+
+// String longestCommonPrefix (String[] strs) {
+//     // 横向扫描
+//     if(strs.length==0 || strs==null){
+//         return "";
+//     }
+//     //以第一个字符开始
+//     String prefix = strs[0];
+//     for(int i=1;i<strs.length;i++){
+//         prefix = GetCommonPrefix(prefix,strs[i]);
+//         //表示最长公共前缀就是""
+//         if(prefix.length()==0){
+//             return "";
+//         }
+//     }
+//     return prefix;
+// }
+// //返回两子串公共前缀函数
+// public String GetCommonPrefix(String s1,String s2){
+//     int len= Math.min(s1.length(),s2.length());
+//     int flag=0;
+//     while(flag<len && s1.charAt(flag)==s2.charAt(flag)){
+//         flag++;
+//     }
+//     return s1.substring(0,flag);
+// }
+
+
+// 构造二叉树
+// TreeNode* myBuildTree(const vector<int>& preorder, const vector<int>& inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right) {
+//     if (preorder_left > preorder_right) {
+//         return nullptr;
+//     }
+    
+//     // 前序遍历中的第一个节点就是根节点
+//     int preorder_root = preorder_left;
+//     // 在中序遍历中定位根节点
+//     int inorder_root = index[preorder[preorder_root]];
+    
+//     // 先把根节点建立出来
+//     TreeNode* root = new TreeNode(preorder[preorder_root]);
+//     // 得到左子树中的节点数目
+//     int size_left_subtree = inorder_root - inorder_left;
+//     // 递归地构造左子树，并连接到根节点
+//     // 先序遍历中「从 左边界+1 开始的 size_left_subtree」个元素就对应了中序遍历中「从 左边界 开始到 根节点定位-1」的元素
+//     root->left = myBuildTree(preorder, inorder, preorder_left + 1, preorder_left + size_left_subtree, inorder_left, inorder_root - 1);
+//     // 递归地构造右子树，并连接到根节点
+//     // 先序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素就对应了中序遍历中「从 根节点定位+1 到 右边界」的元素
+//     root->right = myBuildTree(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right, inorder_root + 1, inorder_right);
+//     return root;
+// }
+// TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+//     int n = preorder.size();
+//     // 构造哈希映射，帮助我们快速定位根节点
+//     for (int i = 0; i < n; ++i) {
+//         index[inorder[i]] = i;
+//     }
+//     return myBuildTree(preorder, inorder, 0, n - 1, 0, n - 1);
+// }
+
+
 // 二分法 山脉数组中查找目标值
 // int binary_search(MountainArray &mountain, int target, int l, int r, int key(int)) {
 //     target = key(target);
