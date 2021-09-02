@@ -133,9 +133,28 @@ public:
     int PasswordInterception();
 
 
+    // 剑指 Offer 47. 礼物的最大价值
+    int maxValue(vector<vector<int>>& grid);
+
 
     // 二分法 山脉数组中查找目标值
     // int findInMountainArray(int target, MountainArray &mountainArr)
+
+
+    /*
+            给你一个用字符数组 tasks 表示的 CPU 需要执行的任务列表。其中每个字母表示一种不同种类的任务。任务可以以任意顺序执行，并且每个任务都可以在 1 个单位时间内执行完。
+        在任何一个单位时间，CPU 可以完成一个任务，或者处于待命状态。然而，两个 相同种类 的任务之间必须有长度为整数 n 的冷却时间，因此至少有连续 n 个单位时间内 CPU 在执
+        行不同的任务，或者在待命状态。
+            你需要计算完成所有任务所需要的 最短时间
+    */
+    // 621. 任务调度器
+    int leastInterval(vector<char>& tasks, int n);
+
+
+
+    //  和为S的连续正数序列
+    vector<vector<int> > FindContinuousSequence(int sum) ;
+
 
     /****************************************    DP  网格   迷宫   ****************************************/
 
@@ -183,6 +202,24 @@ public:
     // 200. 岛屿数量
     int numIslands();
     void numIslands_DFS(vector<vector<string>>& grid, int x, int y);
+
+
+    /*
+        用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。
+        如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子
+    */
+    // 矩阵中的路径
+    bool hasPath(vector<vector<char> >& matrix, string word); 
+    bool hasPath_dfs(vector<vector<char>> &matrix, int x, int y, int idx, vector<vector<bool>> &visited);
+    string hasPath_target;
+
+
+    /*
+        我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，从同一个方向看总共有多少种不同的方法
+    */
+    // JZ10 矩形覆盖
+    int rectCover(int number) ;
+
 };
 
 

@@ -22,10 +22,13 @@ int main(int argc, char** argv)
 
     // itview.NumberEscapePossible();
 
-    int a = itview.numIslands();
-    cout << a << endl;
-
+    // int a = itview.numIslands();
+    // cout << a << endl;
     
+    bool a = false;
+    bool b = false;
+    a |= b;
+    cout << a << endl;
 
     return 0;
 }

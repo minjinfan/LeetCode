@@ -928,6 +928,209 @@ int Interview::PasswordInterception()
 }
 
 
+int Interview::maxValue(vector<vector<int>>& grid) {
+    int R = grid.size();
+    int C = grid[0].size();
+ 
+    int dp[R][C];
+    for(int i = 0; i < R; ++i){
+        for(int j = 0; j < C; ++j){
+            if(i == 0 && j ==0)
+                dp[i][j] = grid[0][0];
+            else if(i == 0)
+                dp[i][j] = dp[i][j-1] + grid[i][j];
+            else if(j == 0)
+                dp[i][j] = dp[i-1][j] + grid[i][j];
+            else{
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+            }
+        }
+    }
+    return dp[R-1][C-1];
+}
+
+
+int Interview::leastInterval(vector<char>& tasks, int n)
+{
+    unordered_map<char, int> freq;
+    for (char ch: tasks) {
+        ++freq[ch];
+    }
+    
+    // 任务总数
+    int m = freq.size();
+    vector<int> nextValid, rest;
+    for (auto [_, v]: freq) {
+        nextValid.push_back(1);
+        rest.push_back(v);
+    }
+
+    int time = 0;
+    for (int i = 0; i < tasks.size(); ++i) {
+        ++time;
+        int minNextValid = INT_MAX;
+        for (int j = 0; j < m; ++j) {
+            if (rest[j]) {
+                minNextValid = min(minNextValid, nextValid[j]);
+            }
+        }
+        time = max(time, minNextValid);
+        int best = -1;
+        for (int j = 0; j < m; ++j) {
+            if (rest[j] && nextValid[j] <= time) {
+                if (best == -1 || rest[j] > rest[best]) {
+                    best = j;
+                }
+            }
+        }
+        nextValid[best] = time + n + 1;
+        --rest[best];
+    }
+
+    return time;
+}
+
+
+
+bool Interview::hasPath_dfs(vector<vector<char>> &matrix, int x, int y, int idx, vector<vector<bool>> &visited)
+{
+    
+    if(matrix[x][y] != hasPath_target[idx])
+        return false;
+    
+    if(idx == hasPath_target.length() - 1)
+        return true;
+    
+    
+    int R = matrix.size();
+    int C = matrix[0].size();
+    
+    visited[x][y] = true;
+    for(int i = 0; i < 4; ++i){
+        int newX = x + next[i][0];
+        int newY = y + next[i][1];
+        
+        if(newX >= 0 && newX < R && newY >= 0 &&  newY < C && !visited[newX][newY]){
+            
+            if(hasPath_dfs(matrix, newX, newY, idx+1, visited))
+                return true;
+            
+        }
+    }
+    visited[x][y] = false;
+    return false;
+}
+bool Interview::hasPath(vector<vector<char> >& matrix, string word) 
+{
+    // write code here
+    
+    if(matrix.empty() || matrix[0].empty()){
+        return false;
+    }
+    if(word.empty())    return true;
+    
+    hasPath_target = word;
+    
+    int R = matrix.size();
+    int C = matrix[0].size();
+    vector<vector<bool>> visited(R, vector<bool>(C, false));
+
+    for(int i = 0; i < R; ++i){
+        for(int j = 0; j < C; ++j){
+            if(hasPath_dfs(matrix, i, j, 0, visited))
+                return true;
+        }
+    }
+    return false;
+}
+
+
+
+vector<vector<int> > Interview::FindContinuousSequence(int sum) {
+    // vector<vector<int>> res;
+    // for(int i = 1; i <= sum / 2; ++i){
+        
+    //     for(int j = i + 1; j < sum; ++j){
+            
+    //         int tmp = 0;
+    //         for(int k = i; k <= j; ++k){
+    //             tmp += k;
+    //         }
+    //         if(tmp == sum){
+    //             vector<int> tmp;
+    //             for(int m = i; m <= j;++m){
+    //                 tmp.push_back(m);
+    //             }
+    //             res.push_back(tmp);
+    //         }
+    //         else if(tmp > sum){ // i需要向右增大
+    //             break;
+    //         }
+    //     }
+    // }
+    // return res;
+
+    // 前缀和
+    // vector<vector<int>> ret;
+    // int tmp = 0;
+    // for (int i=1; i<=sum/2; ++i) {
+    //     for (int j=i; j<sum; ++j) {
+    //         tmp += j;
+    //         if (sum == tmp) {
+    //             vector<int> ans;
+    //             for (int k=i; k<=j; ++k) ans.push_back(k);
+    //             ret.push_back(ans);
+    //         }
+    //         else if (tmp > sum) {
+    //             // 提前剪枝
+    //             tmp = 0;
+    //             break;
+    //         }
+    //     }
+    // }
+    // return ret;
+
+    // 滑动窗口
+    vector<vector<int>> ret;
+    int l = 1, r = 1;
+    int tmp = 0;
+    while (l <= sum / 2) {
+        if (tmp < sum) {
+            tmp += r;
+            ++r;
+        }
+        else if (tmp > sum) {
+            tmp -= l;
+            ++l;
+        }
+        else {
+            vector<int> ans;
+            for (int k=l; k<r; ++k)
+                ans.push_back(k);
+            ret.push_back(ans);
+            tmp -= l;
+            ++l;
+        }
+    }
+    return ret;
+}
+
+
+
+int Interview::rectCover(int number) {
+    if(number <= 2) return number;
+    
+    int dp[2];
+    dp[0] = 1;
+    dp[1] = 2;
+    for(int i = 3; i <= number; ++i){
+        int tmp = dp[1];
+        dp[1] = dp[0] + dp[1];
+        dp[0] = tmp;
+    }
+    return dp[1];
+}
+
 // 二分法 山脉数组中查找目标值
 // int binary_search(MountainArray &mountain, int target, int l, int r, int key(int)) {
 //     target = key(target);
