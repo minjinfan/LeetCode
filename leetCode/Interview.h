@@ -160,6 +160,8 @@ public:
     string longestCommonPrefix(vector<string>& strs);
 
 
+    // 字符串加密
+    int StringEncryption();
 
 
     /****************************************    DP  网格   迷宫   ****************************************/
@@ -242,6 +244,15 @@ public:
     */
     // 硬币划分
     int CoinDivision();
+
+
+    // 路由器传包、  贼偷窃 问题
+    int HJRout();
+    int HJRout2();  // 首尾相连
+
+
+    // 最长回文子串
+    string longestPalindrome(string s);
 
 };
 

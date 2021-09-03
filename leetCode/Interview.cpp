@@ -1210,6 +1210,160 @@ int Interview::CoinDivision()
     return 0;
 }
 
+vector<int> HJRout_fun(vector<int> pre, int forward, int cache)
+{
+    int sent1 = min(forward, pre[0]);
+
+    int redis = pre[0] > forward ? pre[0] - forward : 0;
+    redis = min(redis, cache);
+
+    int sent2 = min(pre[1] + redis, forward);
+
+    return {sent1, sent2};
+}
+
+int Interview::HJRout()
+{
+   
+    // int k= 2;
+    // string str = "50,60 30,25";
+    // int n = 120;      // 包的个数
+
+    int k= 5;
+    string str = "50,50 20,20 40,10 30,5 10,5";
+    int n = 100;      // 包的个数
+
+    // int k= 1;
+    // string str = "30,30";
+    // int n = 100; 
+
+    if(k == 0)
+        return  n;
+
+    int forward[k+1];  // 转发量
+    int cache[k+1];    // 缓存量
+    forward[0] = n;
+    cache[0] = 0;
+
+    stringstream ss(str);
+    string single;
+    int idx = 1;
+    while(getline(ss, single, ' ')){
+        stringstream sin(single);
+        int a, b; 
+        char space;
+        sin >> a >> space >> b;
+        forward[idx]  = a;
+        cache[idx] = b;
+        idx++;
+    }
+
+    // int dp[n+1][2];  // dp[i][0] : 第i个节点第一次发送的数量，   dp[i][1] : 第i个节点第二次发送的数量
+    vector<vector<int>> dp(n+1, vector<int>(2));  // // dp[i][0] : 第i个节点第一次发送的数量，   dp[i][1] : 第i个节点第二次发送的数量
+    dp[0][0] = n;
+    dp[0][1] = 0;  // 输入
+
+    dp[1] = HJRout_fun(dp[0], forward[1], cache[1]);
+
+    for(int i = 2; i <= k; ++i){
+        vector<int> res1 = HJRout_fun(dp[i-1], forward[i], cache[i]);
+        vector<int> res2 = HJRout_fun(dp[i-2], forward[i], cache[i]);
+
+        dp[i] = (res1[0]+res1[1]) < (res2[0] + res2[1]) ? res1 : res2;
+    }
+
+    int res = (dp[k-1][0] + dp[k-1][1]) < (dp[k][0] + dp[k][1]) ? (dp[k-1][0] + dp[k-1][1]) : (dp[k][0] + dp[k][1]);
+
+    cout << res << endl;
+
+    // cout << "Hello Word \n";
+    return 0;
+}
+
+int Interview::HJRout2()
+{
+   
+    // int k= 2;
+    // string str = "50,60 30,25";
+    // int n = 120;      // 包的个数
+
+    int k= 5;
+    string str = "50,50 20,20 40,10 30,5 10,5";
+    int n = 100;      // 包的个数
+
+    // int k= 1;
+    // string str = "30,30";
+    // int n = 100; 
+
+    if(k == 0)
+        return  n;
+
+    int forward[k+1];  // 转发量
+    int cache[k+1];    // 缓存量
+    forward[0] = n;
+    cache[0] = 0;
+
+    stringstream ss(str);
+    string single;
+    int idx = 1;
+    while(getline(ss, single, ' ')){
+        stringstream sin(single);
+        int a, b; 
+        char space;
+        sin >> a >> space >> b;
+        forward[idx]  = a;
+        cache[idx] = b;
+        idx++;
+    }
+
+    // int dp[n+1][2];  // dp[i][0] : 第i个节点第一次发送的数量，   dp[i][1] : 第i个节点第二次发送的数量
+    vector<vector<int>> dp(n+1, vector<int>(2));  // // dp[i][0] : 第i个节点第一次发送的数量，   dp[i][1] : 第i个节点第二次发送的数量
+    dp[0][0] = n;
+    dp[0][1] = 0;  // 输入
+
+    dp[1] = HJRout_fun(dp[0], forward[1], cache[1]);
+    if(k == 1){
+        cout << dp[1][0] + dp[1][1] << endl;
+        return dp[1][0] + dp[1][1];
+    }
+    if(k == 2){
+        vector<int> res1 = HJRout_fun(dp[k-1], forward[k], cache[k]);
+        vector<int> res2 = HJRout_fun(dp[k-2], forward[k], cache[k]);
+
+        dp[k] = (res1[0]+res1[1]) < (res2[0] + res2[1]) ? res1 : res2;
+        int res = (dp[k-1][0] + dp[k-1][1]) < (dp[k][0] + dp[k][1]) ? (dp[k-1][0] + dp[k-1][1]) : (dp[k][0] + dp[k][1]);
+         
+        cout << res << endl;
+        return res;
+    }
+    auto func = [&](int left, int right, vector<vector<int>> &dp){ // 0 ~ n-1     1 ~ n   左闭右开
+       int size = right;
+       dp[left] = dp[left];
+       dp[left + 1] = HJRout_fun(dp[left], forward[left + 1], cache[left + 1]);
+       for(int i = left + 2; i < size; ++i){
+           vector<int> res1 = HJRout_fun(dp[i-1], forward[i], cache[i]);
+           vector<int> res2 = HJRout_fun(dp[i-2], forward[i], cache[i]);
+
+           dp[i] = (res1[0] + res1[1]) < (res2[0] + res2[1]) ? res1 : res2;
+       }
+       return (dp[right - 1][0] + dp[right - 1][1]) < (dp[right-2][0] + dp[right-2][1]) ? (dp[right-1][0] + dp[right-1][1]) : (dp[right - 2][0] + dp[right - 2][1]);
+       
+   };
+
+    int res1 = func(0, k - 1, dp);
+    int res2 = func(1, k, dp);
+
+    int res = min(res1, res2);
+    cout << res << endl;
+
+    // cout << "Hello Word \n";
+    return 0;
+}
+
+
+
+
+// // 最长公共前缀
 // String longestCommonPrefix (String[] strs) {
 //     // 横向扫描
 //     if(strs.length==0 || strs==null){
@@ -1235,6 +1389,7 @@ int Interview::CoinDivision()
 //     }
 //     return s1.substring(0,flag);
 // }
+
 
 
 // 构造二叉树
@@ -1304,3 +1459,116 @@ int Interview::CoinDivision()
 //     return binary_search(mountainArr, target, peak + 1, mountainArr.length() - 1, [](int x) -> int{return -x;});
 // }
 
+
+
+string Interview::longestPalindrome(string s) {
+    int n = s.size();
+    if (n < 2) {
+        return s;
+    }
+
+    int maxLen = 1;
+    int begin = 0;
+    // dp[i][j] 表示 s[i..j] 是否是回文串
+    vector<vector<int>> dp(n, vector<int>(n));
+    // 初始化：所有长度为 1 的子串都是回文串
+    for (int i = 0; i < n; i++) {
+        dp[i][i] = true;
+    }
+    // 递推开始
+    // 先枚举子串长度
+    for (int L = 2; L <= n; L++) {
+        // 枚举左边界，左边界的上限设置可以宽松一些
+        for (int i = 0; i < n; i++) {
+            // 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得
+            int j = L + i - 1;
+            // 如果右边界越界，就可以退出当前循环
+            if (j >= n) {
+                break;
+            }
+
+            if (s[i] != s[j]) {
+                dp[i][j] = false;
+            } else {
+                if (j - i < 3) {
+                    dp[i][j] = true;
+                } else {
+                    dp[i][j] = dp[i + 1][j - 1];
+                }
+            }
+
+            // 只要 dp[i][L] == true 成立，就表示子串 s[i..L] 是回文，此时记录回文长度和起始位置
+            if (dp[i][j] && j - i + 1 > maxLen) {
+                maxLen = j - i + 1;
+                begin = i;
+            }
+        }
+    }
+    return s.substr(begin, maxLen);
+}
+// // 中心扩展算法
+// pair<int, int> expandAroundCenter(const string& s, int left, int right) {
+//     while (left >= 0 && right < s.size() && s[left] == s[right]) {
+//         --left;
+//         ++right;
+//     }
+//     return {left + 1, right - 1};
+// }
+// string longestPalindrome(string s) {
+//     int start = 0, end = 0;
+//     for (int i = 0; i < s.size(); ++i) {
+//         auto [left1, right1] = expandAroundCenter(s, i, i);
+//         auto [left2, right2] = expandAroundCenter(s, i, i + 1);
+//         if (right1 - left1 > end - start) {
+//             start = left1;
+//             end = right1;
+//         }
+//         if (right2 - left2 > end - start) {
+//             start = left2;
+//             end = right2;
+//         }
+//     }
+//     return s.substr(start, end - start + 1);
+// }
+
+
+
+int Interview::StringEncryption()
+{
+
+    string key, str;
+    key = "nihao";
+    str = "ni";
+    // while(cin >> key >> str){
+
+        // 构造密钥
+        vector<char> miyao;
+        for(int i = 0; i < key.size(); ++i){
+            if('a' <= key[i] && key[i] <= 'z')
+                key[i] = key[i] - 32;
+            
+            vector<char>::iterator iter = find(miyao.begin(), miyao.end(), key[i]);
+            if(iter == miyao.end())  // 没找到 才压进去
+                miyao.push_back(key[i]);
+        }
+
+        for(char i = 'A'; i <= 'Z'; ++i){
+            auto iter = find(miyao.begin(), miyao.end(), i);
+            if(iter == miyao.end())  // 没找到 才压进去
+                miyao.push_back(i);
+        }
+
+        char res;
+        for(int i = 0; i < str.length(); ++i){
+            if('a' <= str[i] && str[i] <= 'z')
+                res = miyao[str[i] - 'a'] + 32;
+            else{
+                res = miyao[str[i] - 'A'];
+            }
+            cout << res;
+        }
+        cout << endl;
+    // }
+
+    return 0;
+}

@@ -439,7 +439,7 @@ int Solution::rob2(vector<int>& nums)
     int res = rob(sum);
     return res;
 
-    return res;
+    // return res;
 }
 
 bool Solution::canJump(vector<int>& nums)

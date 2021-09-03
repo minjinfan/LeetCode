@@ -7,28 +7,25 @@
 
 using namespace std;
 
+vector<int> fun(vector<int> pre, int forward, int cache)
+{
+    int sent1 = min(forward, pre[0]);
+
+    int redis = pre[0] > forward ? pre[0] - forward : 0;
+    redis = min(redis, cache);
+
+    int sent2 = min(pre[1] + redis, forward);
+
+    return {sent1, sent2};
+}
+
 int main(int argc, char** argv)
 {
-    Solution sl;
-    
+   
     Interview itview;
+    // itview.HJRout2();
+    itview.StringEncryption();
 
-
-    string ss = "aaa<2>bbbbb</>abcd";
-    // char c = itview.StringLengthCalculationAndInterception(ss);
-    // itview.BuyTicket();
-
-    // itview.Sudoku();
-
-    // itview.NumberEscapePossible();
-
-    // int a = itview.numIslands();
-    // cout << a << endl;
-    
-    bool a = false;
-    bool b = false;
-    a |= b;
-    cout << a << endl;
-
+    // cout << "Hello Word \n";
     return 0;
 }
