@@ -24,7 +24,13 @@ int main(int argc, char** argv)
    
     Interview itview;
     // itview.HJRout2();
-    itview.StringEncryption();
+    // itview.StringEncryption();
+
+    unordered_map<int, int> m;
+    m.insert(pair<int, int>(1,1));
+    m.insert(pair<int, int>(2,2));
+    
+    m.insert(pair<int, int>(1, m[2] + 1));
 
     // cout << "Hello Word \n";
     return 0;

@@ -1460,7 +1460,7 @@ int Interview::HJRout2()
 // }
 
 
-
+// 最长回文子串
 string Interview::longestPalindrome(string s) {
     int n = s.size();
     if (n < 2) {
@@ -1570,5 +1570,46 @@ int Interview::StringEncryption()
         cout << endl;
     // }
 
+    return 0;
+}
+
+
+
+bool MT1_judge(vector<int> vec, int start, int m){
+    start++;  // 
+    if(start == vec.size())  return false;
+    if(start < vec.size() && vec[start] == m)   // ?  while
+        return false;
+    return true;
+}
+int Interview::MT1(){
+    int n, x, y;
+    cin >> n >> x >> y;
+
+    if(n < 2*x || n > 2 * y){
+        cout << -1 << endl;
+        return 0;
+    }
+        
+    vector<int> nums(n);
+    for(int i = 0; i < n; ++i) cin >> nums[i];
+     
+    sort(nums.begin(), nums.end());
+    int cnt_out = 0;
+    int cnt_in = n;  // in = n - 1?  先 cnt_in-- 的
+    for(int i = 0; i < n; ++i){
+        int m = nums[i];
+        cnt_out++;
+        cnt_in--;
+        if(x <= cnt_out && cnt_out <= y && x <= cnt_in && cnt_in <= y){
+
+            if(MT1_judge(nums, i, m)){
+                cout << nums[i] << endl;
+                return 0;
+            }
+
+        }
+    }
+    cout << -1 << endl;
     return 0;
 }
