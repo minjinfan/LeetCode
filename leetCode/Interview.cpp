@@ -1613,3 +1613,42 @@ int Interview::MT1(){
     cout << -1 << endl;
     return 0;
 }
+
+
+
+int Interview::ZJ_userhobby()
+{
+    int n;
+    while(cin >> n){
+        vector<int> user(n);
+        for(int i = 0; i < n; ++i){
+            cin >> user[i];
+        }
+        int q;
+        cin >> q;
+        vector<int> L(q) , R(q), K(q);
+        for(int i = 0; i < q; ++i){
+            cin >> L[i] >> R[i] >> K[i];
+        }
+        map<int, vector<int>> mp;  //  喜好值 、 用户编号
+        for(int i = 0; i < n; ++i){
+            mp[user[i]].push_back(i+1);
+        }
+        vector<int> res(q, 0);
+        for(int i = 0; i < q; ++i){
+            vector<int> vec = mp[K[i]];
+            
+            auto left = lower_bound(vec.begin(), vec.end(), L[i]);  // >=
+            
+            auto right = upper_bound(vec.begin(), vec.end(), R[i]); // >
+            
+            res[i] = right - left;      // 迭代器相减
+        }
+        for(int i = 0; i < q; ++i){
+            cout << res[i] << endl;
+        }
+        
+    }
+    
+    return 0;
+}
