@@ -102,3 +102,84 @@ int ZJ_1()
     }
     cout << count % 99997867;
 }
+
+
+
+int DP::minPathSum(vector<vector<int> >& matrix)
+{
+        // write code here
+    int R = matrix.size();
+    int C = matrix[0].size();
+    
+    vector<vector<int>> dp(R, vector<int>(C,0));
+    dp[0][0] = matrix[0][0];
+    
+    // 第一行
+    for(int j = 0; j < C; ++j){
+        dp[0][j] = dp[0][j-1] + matrix[0][j];
+    }
+    
+    // 第一列
+    for(int i = 1; i < R; ++i){
+        dp[i][0] = dp[i-1][0] + matrix[i][0];
+    }
+    
+    for(int i = 1; i < R; ++i){
+        for(int j = 1; j < C; ++j){
+            int tmp = min(dp[i-1][j], dp[i][j-1]);
+            dp[i][j] = matrix[i][j] + tmp;
+        }
+    }
+    
+    return dp[R-1][C-1];
+    
+}
+
+
+
+
+
+/*
+打家劫舍III
+在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，
+聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
+
+unordered_map <TreeNode*, int> f, g;
+void dfs(TreeNode* node) {
+    if (!node) {
+        return;
+    }
+    dfs(node->left);
+    dfs(node->right);
+    f[node] = node->val + g[node->left] + g[node->right];
+    g[node] = max(f[node->left], g[node->left]) + max(f[node->right], g[node->right]);
+}
+int rob(TreeNode* root) {
+    dfs(root);
+    return max(f[root], g[root]);
+}
+
+// 优化
+struct SubtreeStatus {
+    int selected;
+    int notSelected;
+};
+class Solution {
+public:
+    SubtreeStatus dfs(TreeNode* node) {
+        if (!node) {
+            return {0, 0};
+        }
+        auto l = dfs(node->left);
+        auto r = dfs(node->right);
+        int selected = node->val + l.notSelected + r.notSelected;
+        int notSelected = max(l.selected, l.notSelected) + max(r.selected, r.notSelected);
+        return {selected, notSelected};
+    }
+
+    int rob(TreeNode* root) {
+        auto rootStatus = dfs(root);
+        return max(rootStatus.selected, rootStatus.notSelected);
+    }
+};
+*/

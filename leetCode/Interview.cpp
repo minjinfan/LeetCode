@@ -1652,3 +1652,66 @@ int Interview::ZJ_userhobby()
     
     return 0;
 }
+
+
+int Interview::subarraySum(vector<int>& nums, int k)
+{
+    unordered_map<int, int> mp;
+    mp[0] = 1;
+    int count = 0, pre = 0;
+    for (auto& x:nums) {
+        pre += x;
+        if (mp.find(pre - k) != mp.end()) {
+            count += mp[pre - k];
+        }
+        mp[pre]++;
+    }
+    return count;
+}
+
+
+int subarraysDivByK(vector<int>& nums, int k) {
+    unordered_map<int, int> record = {{0, 1}};
+    int sum = 0, ans = 0;
+    for (int elem: nums) {
+        sum += elem;
+        // 注意 C++ 取模的特殊性，当被除数为负数时取模结果为负数，需要纠正
+        int modulus = (sum % k + k) % k;
+        if (record.count(modulus)) {
+            ans += record[modulus];
+        }
+        ++record[modulus];
+    }
+    return ans;
+}
+
+int shortestSubarray(vector<int>& A, int K) 
+{
+    
+    int n = A.size();
+    vector<int> sum(n+1, 0);
+    
+    for(int i = 0; i < n; i++) //准备工作
+        sum[i+1] = sum[i] + A[i];
+    
+    deque<int> de;
+    int j = 0;
+    int res = n+1;
+    
+    while(j<=n){
+        
+        while(!de.empty() && sum[j] <= sum[de.back()]){ //我们确定我们前面没有高个，有就踢他
+            de.pop_back();
+        }
+        while(!de.empty() && sum[j] - sum[de.front()] >= K){ //从最前面第一位同学开始，进行比较
+            res = min( res, j - de.front());
+            de.pop_front();
+        }
+        de.push_back(j); //最后才坐下去
+        j++;
+    }
+    if(res == n+1)
+        return -1;
+    else
+        return res;
+}

@@ -182,6 +182,29 @@ public:
   // 用户喜好
     int ZJ_userhobby();
 
+
+
+    /*
+        给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。
+    */
+    int subarraySum(vector<int>& nums, int k);
+
+
+    // 974. 和可被 K 整除的子数组
+    int subarraysDivByK(vector<int>& nums, int k) ;
+
+
+    /*
+        862. 和至少为 K 的最短子数组
+    */
+   int shortestSubarray(vector<int>& A, int K);
+
+
+
+
+
+
+
     /****************************************    DP  网格   迷宫   ****************************************/
 
     int next[4][2] = {{1,0}, {-1,0}, {0,1}, {0, -1}};
@@ -205,6 +228,7 @@ public:
     // 1036. 能否逃离大迷宫  有障碍
     bool EscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
     bool isEscapePossible(vector<vector<int>>& blocked, vector<int>& source, vector<int>& target);
+
 
 
     // 从起点出发达到终点的路线个数
