@@ -7,28 +7,28 @@ using namespace std;
 typedef double real;
 typedef std::vector<double> vec3;
 typedef std::vector<double> vec2;
-struct LinkNode
+struct ListNode
 {
     int val;
-    LinkNode *next;
-    LinkNode() : val(0), next(nullptr) {}
-    LinkNode(int x) : val(x), next(nullptr) {}
-    LinkNode(int x, LinkNode *next) : val(x), next(next) {}
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 class MyLinkedList
 {
 public:
     int _size = 0;
-    LinkNode _dummyHead; 
+    ListNode _dummyHead; 
     MyLinkedList(){
         int _size = 0;
-        _dummyHead = LinkNode();
+        _dummyHead = ListNode();
     }
     ~MyLinkedList(){
-        LinkNode *cur = &_dummyHead;
+        ListNode *cur = &_dummyHead;
         while(cur->next != nullptr){
-            LinkNode *tmp = cur->next;
+            ListNode *tmp = cur->next;
             cur->next = cur->next->next;
             delete tmp;
         }
@@ -37,16 +37,16 @@ public:
     }
 
     void addAtHead(int val) {
-        LinkNode *newHead = new LinkNode(val);
-        LinkNode *cur = &_dummyHead;
+        ListNode *newHead = new ListNode(val);
+        ListNode *cur = &_dummyHead;
         newHead->next = cur->next;
         cur->next = newHead;
         _size++;
     }
 
     void addAtTail(int &val){
-        LinkNode *newNode = new LinkNode(val);
-        LinkNode *cur = &_dummyHead;
+        ListNode *newNode = new ListNode(val);
+        ListNode *cur = &_dummyHead;
         while(cur->next != nullptr){
             cur = cur->next;
         }
@@ -63,7 +63,7 @@ public:
 
     void ShowListNode()
     {
-        LinkNode *cur = &_dummyHead;
+        ListNode *cur = &_dummyHead;
         while(cur->next != nullptr){
             cout << cur->next->val << "\t";
             cur = cur->next;
@@ -73,11 +73,11 @@ public:
 };
 
 
-inline void ShowLinkList(LinkNode *List)
+inline void ShowLinkList(ListNode *List)
 {
-    LinkNode dummyHead;
+    ListNode dummyHead;
     dummyHead.next = List;
-    LinkNode *cur = &dummyHead;
+    ListNode *cur = &dummyHead;
     while(cur->next != nullptr){
         cout << cur->next->val << "\t";
         cur = cur->next;
@@ -105,4 +105,12 @@ inline vec3 SubEq(const vec3 &X, const vec3 &Y)
 inline double norm(const vec3 &X)
 {
     return sqrt(pow(X[0],2) + pow(X[1],2) + pow(X[2],2));
+}
+
+inline void showVec(vector<int> vec)
+{
+    for(auto i : vec){
+        cout << i << "  ";
+    }
+    cout << endl;
 }

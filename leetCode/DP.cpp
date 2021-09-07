@@ -66,7 +66,9 @@ int DP::Sokoban()
     memset(visited, 0, sizeof(visited));
     cin >> n >> m;
     path = vector<string>(n, string(""));
-    for (int i = 0; i < n; ++i) cin >> path[i];
+    for (int i = 0; i < n; ++i)
+         cin >> path[i];
+         
     int start_x, start_y, box_x, box_y;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {

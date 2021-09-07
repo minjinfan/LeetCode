@@ -104,55 +104,55 @@ int Solution::Partition(vector<int> &vec, int start, int end)
     int idx = GetMid(vec, start, end);
     Exchange(vec, start, idx);
 
-    {
-        int pivot = vec[start];
-        int left = start + 1;
-        int right = end;
-        while(left < right){
-            while(left < right && vec[left] <= pivot)
-                left++;
-
-            if(left != right){
-                Exchange(vec, left, right);
-                right--;
-            }
-        }
-        if(left == right && vec[right] > pivot)    
-            right--;
-
-        if(left != start)
-            Exchange(vec, start, right);
-
-        return right;
-
-    }
-
-    // { // 双指针
-
-    //     // 取第一个数为基数
+    // {
     //     int pivot = vec[start];
-    //     // 从第二个数开始分区
     //     int left = start + 1;
-    //     // 右边界
     //     int right = end;
-    //     while (left < right) {
-    //         // 找到第一个大于基数的位置
-    //         while (left < right && vec[left] <= pivot) left++;
-    //         // 找到第一个小于基数的位置
-    //         while (left < right && vec[right] >= pivot) right--;
-    //         // 交换这两个数，使得左边分区都小于或等于基数，右边分区大于或等于基数
-    //         if (left < right) {
-    //             Exchange(vec, left, right);
+    //     while(left < right){
+    //         while(left < right && vec[left] <= pivot)
     //             left++;
+
+    //         if(left != right){
+    //             Exchange(vec, left, right);
     //             right--;
     //         }
     //     }
-    //     // 如果 left 和 right 相等，单独比较 arr[right] 和 pivot
-    //     if (left == right && vec[right] > pivot) right--;
-    //     // 将基数和轴交换
-    //     Exchange(vec, start, right);
+    //     if(left == right && vec[right] > pivot)    
+    //         right--;
+
+    //     if(left != start)
+    //         Exchange(vec, start, right);
+
     //     return right;
+
     // }
+
+    { // 双指针
+
+        // 取第一个数为基数
+        int pivot = vec[start];
+        // 从第二个数开始分区
+        int left = start + 1;
+        // 右边界
+        int right = end;
+        while (left < right) {
+            // 找到第一个大于基数的位置
+            while (left < right && vec[left] <= pivot) left++;
+            // 找到第一个小于基数的位置
+            while (left < right && vec[right] >= pivot) right--;
+            // 交换这两个数，使得左边分区都小于或等于基数，右边分区大于或等于基数
+            if (left < right) {
+                Exchange(vec, left, right);
+                left++;
+                right--;
+            }
+        }
+        // 如果 left 和 right 相等，单独比较 arr[right] 和 pivot
+        if (left == right && vec[right] > pivot) right--;
+        // 将基数和轴交换
+        Exchange(vec, start, right);
+        return right;
+    }
 
 }
 
@@ -163,14 +163,14 @@ void Solution::Exchange(vector<int> &vec, int i, int j)
     vec[j] = tmp;
 }
 
-LinkNode* Solution::removeElement(LinkNode* head, int val)
+ListNode* Solution::removeElement(ListNode* head, int val)
 {
-      LinkNode *dummyNode = new LinkNode();
+      ListNode *dummyNode = new ListNode();
         dummyNode->next = head;
-        LinkNode *cur = dummyNode;
+        ListNode *cur = dummyNode;
         while(cur->next != nullptr){
             if(cur->next->val == val){
-                LinkNode *tmp = cur->next;
+                ListNode *tmp = cur->next;
                 cur->next = cur->next->next;
                 delete  tmp;
             }
@@ -184,13 +184,13 @@ LinkNode* Solution::removeElement(LinkNode* head, int val)
         return head;
 }
 
-LinkNode* Solution::removeNthFromEnd(LinkNode* head, int n)
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
 {
-     LinkNode* dummyHead = new LinkNode(-1);
+     ListNode* dummyHead = new ListNode(-1);
     // ListNode dummyHead;
     dummyHead->next = head;
-    LinkNode* fast = dummyHead;
-    LinkNode* slow = dummyHead;
+    ListNode* fast = dummyHead;
+    ListNode* slow = dummyHead;
     while(n-- > 0 && fast->next != nullptr){
         fast = fast->next;
     }
@@ -206,10 +206,10 @@ LinkNode* Solution::removeNthFromEnd(LinkNode* head, int n)
     return dummyHead->next;
 }
 
-LinkNode* Solution::getIntersectionNode(LinkNode *headA, LinkNode *headB)
+ListNode* Solution::getIntersectionNode(ListNode *headA, ListNode *headB)
 {
-    LinkNode* A = headA;
-    LinkNode* B = headB;
+    ListNode* A = headA;
+    ListNode* B = headB;
     int lenA = 0, lenB = 0;
     while(A != nullptr){
         lenA++;
@@ -238,16 +238,16 @@ LinkNode* Solution::getIntersectionNode(LinkNode *headA, LinkNode *headB)
     return NULL;
 }
 
-LinkNode *Solution::detectCycle(LinkNode *head)
+ListNode *Solution::detectCycle(ListNode *head)
 {
-     LinkNode* fast = head;
-        LinkNode* slow = head;
+     ListNode* fast = head;
+        ListNode* slow = head;
         while(fast != nullptr && fast->next != nullptr){
             fast = fast->next->next;
             slow = slow->next;
             if(fast == slow){
-                LinkNode* node1 = fast;
-                LinkNode* node2 = head;
+                ListNode* node1 = fast;
+                ListNode* node2 = head;
                 while(node1 != node2){
                     node1 = node1->next;
                     node2 = node2->next;
@@ -504,4 +504,81 @@ int Solution::maxProduct(vector<int>& nums)
         cout << m << "\t" << endl;
     }
     return *max_element(MaxVec.begin(), MaxVec.end());
+}
+
+
+
+ListNode* Solution::mergeTwoList(ListNode* a, ListNode* b)
+{
+    if(!a || !b)
+        return a ? a : b; 
+    
+    ListNode dummy(-1);
+    ListNode* head = &dummy;
+    ListNode *pa = a, *pb = b;
+    while(pa != nullptr && pb != nullptr){
+        if(pa->val < pb->val){
+            head->next = pa;
+            pa = pa->next;
+            // head = head->next;
+        }else{
+
+            head->next = pb;
+            pb = pb->next;
+            // head = head->next;
+        }
+        head = head->next;
+    }
+    if(pa != nullptr){
+        head->next = pa;
+    }
+    if(pb != nullptr){
+        head->next = pb;
+    }
+    return dummy.next;
+}
+struct Node{
+    int val;
+    ListNode* ptr;
+    Node(int x){ val = x; }
+    Node(int x, ListNode* p){ val = x; ptr = p;}
+    bool operator < (const Node& a) const{
+        return a.val < val;  // 小顶堆
+    }
+};
+ListNode* Solution::mergeKLists(vector<ListNode*>& lists)
+{
+     /* 暴力
+        ListNode *dummy = nullptr;
+        for(int i = 0; i < lists.size(); ++i){
+            dummy = mergeTwoList(dummy, lists[i]);
+        }
+        return dummy;
+        */
+        
+        /*  分治
+        if(lists.size() == 0)
+            return nullptr;
+        return merge(lists, 0, lists.size() - 1);
+        */
+
+        priority_queue<Node> Q;
+        for(auto p : lists){
+            if(p != nullptr)
+                Q.push(Node(p->val, p));
+        }
+        ListNode dummy(-1);
+        ListNode* ptr = &dummy;
+        while(!Q.empty()){
+            
+            auto [_, p] = Q.top();
+            Q.pop();
+
+            ptr->next = p;
+            ptr = ptr->next;
+            if(p->next != nullptr){
+                Q.push({p->next->val, p->next});
+            }
+        }
+        return dummy.next;
 }

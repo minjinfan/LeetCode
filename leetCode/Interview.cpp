@@ -1715,3 +1715,43 @@ int shortestSubarray(vector<int>& A, int K)
     else
         return res;
 }
+
+
+
+// ListNode* Interview::mergeTwoList(ListNode* a, ListNode* b)
+// {
+//     if(!a || !b)
+//         return a ? a : b; 
+    
+//     ListNode dummy(-1);
+//     ListNode* head = &dummy;
+//     ListNode *pa = a, *pb = b;
+//     while(pa != nullptr && pb != nullptr){
+//         if(pa->val < pb->val){
+//             head->next = pa;
+//             pa = pa->next;
+//             // head = head->next;
+//         }else{
+
+//             head->next = pb;
+//             pb = pb->next;
+//             // head = head->next;
+//         }
+//         head = head->next;
+//     }
+//     if(pa != nullptr){
+//         head->next = pa;
+//     }
+//     if(pb != nullptr){
+//         head->next = pb;
+//     }
+//     return dummy.next;
+// }
+// ListNode* Interview::mergeKLists(vector<ListNode*>& lists)
+// {
+//     ListNode *dummy = nullptr;
+//     for(int i = 0; i < lists.size(); ++i){
+//         dummy = mergeTwoList(dummy, lists[i]);
+//     }
+//     return dummy;
+// }

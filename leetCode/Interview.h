@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
+// #include <Common.hpp>
 
 
 // #include "Common.hpp"
@@ -297,6 +298,10 @@ public:
     // 最长回文子串
     string longestPalindrome(string s);
 
+
+    // //  23. 合并K个升序链表     见 function.h
+    // ListNode* mergeKLists(vector<ListNode*>& lists);
+    // ListNode* mergeTwoList(ListNode* a, ListNode* b);
 
 
 };
