@@ -1755,3 +1755,43 @@ int shortestSubarray(vector<int>& A, int K)
 //     }
 //     return dummy;
 // }
+
+
+
+
+vector<vector<int>> res;
+vector<int> path;
+vector<vector<int>> Interview::permuteUnique(vector<int>& nums)
+{
+
+    vector<bool> visited(nums.size(), false);
+
+    sort(nums.begin(), nums.end());
+
+    permuteUnique_dfs(nums, 0,0, visited);
+
+    return res;
+}
+void Interview::permuteUnique_dfs(vector<int> &nums, int idx, int cnt, vector<bool> &visited)
+{
+    if(cnt == nums.size()){
+            res.push_back(path);
+            return ;
+    }
+
+    for(int i = 0; i < nums.size(); ++i){
+        if(visited[i])
+            continue;
+        
+        if(i > 0 && !visited[i-1] && nums[i] == nums[i-1])
+            continue;
+
+        visited[i] = true;
+        path.push_back(nums[i]);
+
+        permuteUnique_dfs(nums, i + 1, cnt + 1, visited);
+
+        visited[i] = false;
+        path.pop_back();
+    }
+}

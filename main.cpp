@@ -36,6 +36,36 @@ struct tmp2{  // 重载运算符
     }
 };
 
+
+vector<string> rec;
+vector<int> vis;
+
+void backtrack(const string& s, int i, int n, string& perm) {
+    if (i == n) {
+        rec.push_back(perm);
+        return;
+    }
+    for (int j = 0; j < n; j++) {
+        if (vis[j] || (j > 0 && !vis[j - 1] && s[j - 1] == s[j])) {
+            continue;
+        }
+        vis[j] = true;
+        perm.push_back(s[j]);
+        backtrack(s, i + 1, n, perm);
+        perm.pop_back();
+        vis[j] = false;
+    }
+}
+
+vector<string> permutation(string s) {
+    int n = s.size();
+    vis.resize(n);
+    sort(s.begin(), s.end());
+    string perm;
+    backtrack(s, 0, n, perm);
+    return rec;
+}
+
 int main(int argc, char** argv)
 {
     
@@ -89,26 +119,16 @@ int main(int argc, char** argv)
         }
    */
 
-    vector<int> vec = {3,1,5,4,7,9,3,8,2,6};
-    Interview itview;
-    Solution sl;
-//    sl.quickSort(vec);
-//    showVec(vec);
 
-    // priority_queue<int, vector<int>, tmp1> Q;
-    priority_queue<tmp2> Q;
-
-    for(int i = 0; i < vec.size(); ++i){
-        Q.push(vec[i]);
-    }
-    while(!Q.empty()){
-        // cout << Q.top() << " ";
-        cout << Q.top().x << " ";
-        Q.pop();
-    }
+  string ss("122");
+  vector<string> v_s = permutation(ss);
 
 
     cout << endl;
     return 0;
 
 }
+
+
+
+

@@ -304,6 +304,12 @@ public:
     // ListNode* mergeTwoList(ListNode* a, ListNode* b);
 
 
+    // 剑指 Offer II 084. 含有重复元素集合的全排列 
+    vector<vector<int>> permuteUnique(vector<int>& nums);
+    void permuteUnique_dfs(vector<int> &nums, int idx, int cnt, vector<bool> &visited);
+
+
+
 };
 
 
