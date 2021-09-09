@@ -138,11 +138,115 @@ int DP::minPathSum(vector<vector<int> >& matrix)
 }
 
 
+int DP::largestRectangleArea(vector<int> &heights) 
+{
+    unsigned long size = heights.size();
+    if (size == 1) {
+        return heights[0];
+    }
+    int res = 0;
+    stack<int> stk;
+    for (int i = 0; i < size; ++i) {
+        while (!stk.empty() && heights[stk.top()] > heights[i]) {
+            int length = heights[stk.top()];
+            stk.pop();
+            int weight = i;
+            if (!stk.empty()) {
+                weight = i - stk.top() - 1;
+            }
+            res = max(res, length * weight);
+        }
+        stk.push(i);
+    }
+    while (!stk.empty()) {
+        int length = heights[stk.top()];
+        stk.pop();
+        int weight = size;
+        if (!stk.empty()) {
+            weight = size - stk.top() - 1;
+        }
+        res = max(res, length * weight);
+    }
+    return res;
+}
+// // 柱状图中的 最大矩形 面积 暴力解法 
+// int largestRectangleArea(int[] heights) {
+//     int len = heights.length;
+//     // 特判
+//     if (len == 0) {
+//         return 0;
+//     }
+//     int res = 0;
+//     for (int i = 0; i < len; i++) {
+//         // 找左边最后 1 个大于等于 heights[i] 的下标
+//         int left = i;
+//         int curHeight = heights[i];
+//         while (left > 0 && heights[left - 1] >= curHeight) {
+//             left--;
+//         }
+//         // 找右边最后 1 个大于等于 heights[i] 的索引
+//         int right = i;
+//         while (right < len - 1 && heights[right + 1] >= curHeight) {
+//             right++;
+//         }
+//         int width = right - left + 1;
+//         res = Math.max(res, width * curHeight);
+//     }
+//     return res;
+// }
 
 
 
 /*
-打家劫舍III
+给出一颗二叉树，每个节点有一个编号和一个值，该值可能为负数，请你找出一个最优节点(除根节点外)，
+使得在该节点将树分成两棵树后(原来的树移除这个节点及其子节点，新的树以该节点为根节点)，
+分成的两棵树各 节点的和之间的差绝对值最大。请输出该节点编号，如有多个相同的差，输出编号最小的节点。
+*/
+const int N = 1e6 + 50;
+vector<int> v[N], sum(N + 1);
+
+void dfs(int x) {
+    for (int &y : v[x]) {
+        dfs(y);
+        sum[x] += sum[y];
+    }
+}
+
+int HW98_01() 
+{
+    // ios::sync_with_stdio(false);
+    int n;
+    long long tot = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> sum[i];
+        tot += sum[i];
+    }
+    for (int x, y, i = 1; i < n; i++) {
+        cin >> x >> y;
+        x++;
+        y++;
+        v[x].push_back(y);
+    }
+
+    dfs(1);
+    int res = 0;
+    int ans = 0;
+    for (int i = 2; i <= n; i++) {
+        if (abs(sum[i] - tot + sum[i]) > ans) {
+            ans = abs(sum[i] - tot + sum[i]);
+
+            res = i;
+        }
+    }
+
+    // cout << ans;
+    cout << res << endl;   // ?
+}
+
+
+
+/*打家劫舍III  二叉树
 在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，
 聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。
 
@@ -185,3 +289,97 @@ public:
     }
 };
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void preorderTraversal_helper(TreeNode* root, vector<int> &res){
+    if(root == nullptr){
+        return ;
+    }
+
+    res.push_back(root->val);
+    preorderTraversal_helper(root->left, res);
+    preorderTraversal_helper(root->right, res);
+}
+vector<int> DP::preorderTraversal(TreeNode* root) 
+{
+    if(root == nullptr)
+        return {};
+    vector<int> res;
+    preorderTraversal_helper(root, res);
+
+    /* 非递归
+    stack<TreeNode*> stk;
+    stk.push(root);
+    while(!stk.empty()){
+        TreeNode* t = stk.top();
+        stk.pop();
+        res.push_back(t->val);
+        if(t->right != nullptr)
+            stk.push(t->right);
+        if(t->left != nullptr)
+            stk.push(t->left);
+        
+    }
+    */
+
+    return res;
+}
+
+
+void inorderTraversal_helper(TreeNode* root, vector<int> &res){
+    if(root == nullptr){
+        return;
+    }
+    inorderTraversal_helper(root->left, res);
+    res.push_back(root->val);
+    inorderTraversal_helper(root->right, res);
+}
+vector<int> DP::inorderTraversal(TreeNode* root) 
+{
+
+    vector<int> res;
+
+    if(root == nullptr)
+        return res;
+
+    inorderTraversal_helper(root, res);
+    return res;
+
+    /* 非递归
+    stack<TreeNode *> stk;
+    TreeNode* p;
+    p = root;
+    while(!stk.empty() || p != nullptr){
+        if(p != nullptr){
+            stk.push(p);
+            p = p->left;
+        }
+        else{
+            p = stk.top();
+            stk.pop();
+
+            res.push_back(p->val);
+            p = p->right;
+        }
+    }
+    return res;
+    */
+}

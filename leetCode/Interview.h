@@ -198,9 +198,12 @@ public:
     /*
         862. 和至少为 K 的最短子数组
     */
+   // 862. 和至少为 K 的最短子数组
    int shortestSubarray(vector<int>& A, int K);
 
 
+
+    // ListNode* Interview::mergeKLists(vector<ListNode*>& lists)
 
 
 
@@ -299,9 +302,9 @@ public:
     string longestPalindrome(string s);
 
 
-    // //  23. 合并K个升序链表     见 function.h
+    /* //  23. 合并K个升序链表     见 function.h
     // ListNode* mergeKLists(vector<ListNode*>& lists);
-    // ListNode* mergeTwoList(ListNode* a, ListNode* b);
+    // ListNode* mergeTwoList(ListNode* a, ListNode* b);*/
 
 
     // 剑指 Offer II 084. 含有重复元素集合的全排列 
@@ -309,6 +312,9 @@ public:
     void permuteUnique_dfs(vector<int> &nums, int idx, int cnt, vector<bool> &visited);
 
 
+    // 构造二叉树
+
+    // // 最长公共前缀
 
 };
 
