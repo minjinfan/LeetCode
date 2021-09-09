@@ -294,7 +294,59 @@ public:
 
 
 
+int DP::calculateMinimumHP(vector<vector<int>>& dungeon) 
+{
 
+    int R = dungeon.size();
+    int C = dungeon[0].size();
+
+    vector<vector<int>> dp(R, vector<int>(C, INT_MAX));
+    // dp[R-1][C-1] = max(1,1-dungeon[R-1][C-1]);
+    // for(int i = R-2; i >=0; i--){ // 最后一列
+    //     dp[i][C-1] = max((dp[i+1][C-1] - dungeon[i][C-1]),1);
+    // }
+    // for(int j = C-2; j >= 0; j--){ // 最后一行
+    //     dp[R-1][j] = max(dp[R-1][j + 1] - dungeon[R-1][j], 1);
+    // }
+    // for(int i = R - 2 ; i >= 0; i--){
+    //     for(int j = C - 2; j >= 0; j--){
+    //         int a = (dp[i + 1][j] - dungeon[i][j]) > 0 ? (dp[i + 1][j] - dungeon[i][j]) : 1;
+    //         int b = (dp[i][j+1] - dungeon[i][j]) > 0 ? (dp[i][j+1] - dungeon[i][j]) : 1;
+
+    //         dp[i][j] = min(a,b);
+    //     }
+    // }
+    // return dp[0][0];
+    
+    // dp[R-1][C-1] = max(1, 1-dungeon[R-1][C-1]);
+    // for(int i =  R - 2; i >= 0; i--){
+    //     dp[i][C-1] = max(1, dp[i+1][C-1] - dungeon[i][C-1]);
+    // }
+    // for(int j = C - 2; j >= 0; j--){
+    //     dp[R-1][j] = max(1, dp[R-1][j+1] - dungeon[R-1][j]);
+    // }
+    for(int i = R-1; i >=0; i--){
+        for(int j = C-1; j >=0; j--){
+
+            if(i == R-1 && j == C-1){
+                dp[i][j] = max(1, 1 - dungeon[i][j]);
+            }
+            else if(i == R-1){
+                dp[i][j] = max(1, dp[i][j+1] - dungeon[i][j]);
+            }
+            else if(j == C -1){
+                dp[i][j] = max(1, dp[i+1][j] - dungeon[i][j]);
+            }
+            else{
+                int tmp = min(dp[i+1][j], dp[i][j+1]);
+                dp[i][j] = max(1,  tmp - dungeon[i][j]);
+            }
+
+        }
+    }
+
+    return dp[0][0];
+}
 
 
 

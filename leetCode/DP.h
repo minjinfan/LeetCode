@@ -49,7 +49,8 @@ class DP
 
 
 
-
+    // 二维矩阵  初始能量值、健康值
+    int calculateMinimumHP(vector<vector<int>>& dungeon) ;
 
 
 
